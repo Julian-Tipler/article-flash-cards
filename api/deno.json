@@ -1,0 +1,9 @@
+{
+  "lint": {
+    "include": ["supabase/", "test/"],
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": ["no-explicit-any"]
+    }
+  }
+}
