@@ -1,14 +1,15 @@
+import { Cohere } from "https://esm.sh/cohere-ai@7.9.3";
+
 export const parseCompletion = (
-  { completion }: { completion: string },
+  { toolCalls }: {
+    toolCalls: Cohere.ToolCall[];
+  },
 ) => {
+  const cards = toolCalls.map((toolCall) => {
+    const { front, back } = toolCall.parameters;
+    return { front, back };
+  });
   return {
-    cards: [{
-      front: "Front of card",
-      back: "Back of card",
-    }, {
-      front: "Front of card",
-      back: "Back of card",
-    }],
-    cardSetTitle: "Title of card set",
+    cards,
   };
 };

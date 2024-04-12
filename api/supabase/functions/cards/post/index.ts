@@ -27,19 +27,23 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
   const { content } = await req.body;
 
   const prompt = `Make 5 flashcards from this content: ${content}
-  Also come up with a title for this set of flashcards.`;
+  \n\nOnly use information given in the content, do not make up any`;
 
-  const completion = await cohereCompletion({ prompt });
+  const { toolCalls } = await cohereCompletion({ prompt });
 
-  const { cards, cardSetTitle } = parseCompletion({ completion });
+  if (!toolCalls) {
+    throw new Error("Failed to generate completion");
+  }
 
-  const { id: cardSetId } = await createCardSet({ userId, cardSetTitle });
+  const { cards } = parseCompletion({ toolCalls });
 
-  const id = createCards({ userId, cards, cardSetId });
+  const { cardSetId } = await createCardSet({ userId });
+
+  await createCards({ cards, cardSetId });
 
   const response = {
     Status: "Success",
-    id,
+    cardSetId,
   };
   try {
     return new CORSResponse(JSON.stringify(response));

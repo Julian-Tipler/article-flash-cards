@@ -1,9 +1,19 @@
+import { supabase } from "../../_shared/clients/supabase.ts";
+
 export const createCards = async (
-  { userId, cards, cardSetId }: {
-    userId: string;
+  { cards, cardSetId }: {
     cards: any;
     cardSetId: string;
   },
 ) => {
-  return "123";
+  const { data, error } = await supabase.from("cards").insert(
+    cards.map((card: any) => ({
+      cardSetId,
+      ...card,
+    })),
+  );
+  console.log(data, error);
+  if (error) {
+    throw error;
+  }
 };

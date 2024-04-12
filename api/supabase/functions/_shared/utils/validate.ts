@@ -14,7 +14,6 @@ export const validate = <T extends AnyObject>(
   schema: ObjectSchema<T>,
 ) =>
 async (req: Request) => {
-  console.log("VALIDATE");
   try {
     const { method } = req;
     const request = new CompleteRequest();
