@@ -6,6 +6,7 @@ import { cohereCompletion } from "../cohere/cohere-completion.ts";
 import { parseCompletion } from "../helpers/parse-completion.ts";
 import { createCardSet } from "../database/create-card-set.ts";
 import { createCards } from "../database/create-cards.ts";
+import { generatePrompt } from "../cohere/flashcard-prompt.ts";
 interface Req {
   params: {
     userId: string;
@@ -24,12 +25,10 @@ const schema: ObjectSchema<Req> = object({
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const { userId } = req.params;
-    const { content } = await req.body;
+    const { userId }: { userId: string } = req.params;
+    const { content }: { content: string } = await req.body;
 
-    const prompt = `Make 5 flashcards from this content: ${content}
-  \n\nOnly use information given in the content, do not make up any`;
-
+    const prompt = generatePrompt({ content });
     const { toolCalls } = await cohereCompletion({ prompt });
 
     if (!toolCalls) {

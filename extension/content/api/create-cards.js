@@ -1,4 +1,4 @@
-export const createCards = async () => {
+export const createCards = async (articleText) => {
   // TODO Need to figure out how to get user id
   const url =
     import.meta.env.VITE_API_URL +
@@ -13,7 +13,7 @@ export const createCards = async () => {
         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
       },
       body: JSON.stringify({
-        content: "mock article content",
+        content: articleText,
       }),
     });
     if (!response.ok) {
