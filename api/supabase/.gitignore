@@ -2,3 +2,4 @@
 .branches
 .temp
 /functions/_shared/types/supabase.ts
+config.toml
