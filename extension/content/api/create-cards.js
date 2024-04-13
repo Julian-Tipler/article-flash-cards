@@ -1,7 +1,7 @@
 export const createCards = async (articleText) => {
   // TODO Need to figure out how to get user id
   const url =
-    import.meta.env.VITE_API_URL +
+    import.meta.env.VITE_FUNCTIONS_URL +
     "/cards/?userId=" +
     "00000000-0000-0000-0000-000000000000";
 
