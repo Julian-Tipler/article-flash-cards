@@ -1,4 +1,4 @@
-import { createCards } from "../helpers/create-cards";
+import { createCards } from "../api/create-cards";
 
 export const displayButton = () => {
   const body = document.querySelector("body");
