@@ -12,7 +12,6 @@ export const createCards = async (
       ...card,
     })),
   );
-  console.log(data, error);
   if (error) {
     throw error;
   }

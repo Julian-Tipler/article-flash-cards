@@ -23,29 +23,29 @@ const schema: ObjectSchema<Req> = object({
 });
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
-  const { userId } = req.params;
-  const { content } = await req.body;
+  try {
+    const { userId } = req.params;
+    const { content } = await req.body;
 
-  const prompt = `Make 5 flashcards from this content: ${content}
+    const prompt = `Make 5 flashcards from this content: ${content}
   \n\nOnly use information given in the content, do not make up any`;
 
-  const { toolCalls } = await cohereCompletion({ prompt });
+    const { toolCalls } = await cohereCompletion({ prompt });
 
-  if (!toolCalls) {
-    throw new Error("Failed to generate completion");
-  }
+    if (!toolCalls) {
+      throw new Error("Failed to generate completion");
+    }
 
-  const { cards } = parseCompletion({ toolCalls });
+    const { cards } = parseCompletion({ toolCalls });
 
-  const { cardSetId } = await createCardSet({ userId });
+    const { cardSetId } = await createCardSet({ userId });
 
-  await createCards({ cards, cardSetId });
+    await createCards({ cards, cardSetId });
 
-  const response = {
-    Status: "Success",
-    cardSetId,
-  };
-  try {
+    const response = {
+      Status: "Success",
+      cardSetId,
+    };
     return new CORSResponse(JSON.stringify(response));
   } catch (error) {
     console.error(error);

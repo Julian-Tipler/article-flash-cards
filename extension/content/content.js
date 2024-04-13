@@ -4,7 +4,6 @@ import "./index.css";
 console.log("content.js 🚀🚀");
 
 window.addEventListener("load", () => {
-  console.log("content.js loaded");
   init();
 });
 

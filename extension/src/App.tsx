@@ -40,19 +40,19 @@ const App = () => {
 };
 
 async function protectedLoader() {
-  const wiseSessionToken = await isAuthenticated();
-  if (!wiseSessionToken) {
+  const sessionToken = await isAuthenticated();
+  if (!sessionToken) {
     return redirect("/login");
   }
-  if (!wiseSessionToken || !wiseSessionToken.access_token) {
+  if (!sessionToken || !sessionToken.access_token) {
     return redirect("/login");
   }
 
-  const auth = await supabase.auth.getUser(wiseSessionToken.access_token);
+  const auth = await supabase.auth.getUser(sessionToken.access_token);
   if (!auth.data?.user) {
     return redirect("/login");
   }
-  return { wiseSessionToken };
+  return { sessionToken };
 }
 const isAuthenticated = async (): Promise<Session | false> => {
   return new Promise((resolve) => {

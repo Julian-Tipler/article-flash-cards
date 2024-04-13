@@ -1,18 +1,16 @@
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { RequestMethod } from "../_shared/types/request-types.ts";
 import { postCards } from "./post/index.ts";
+import { CORSResponse } from "../_shared/utils/cors.ts";
 
-Deno.serve(async (req) => {
+serve(async (req: Request) => {
   const { method } = req;
   switch (method) {
     case RequestMethod.POST:
       return await postCards(req);
+    case RequestMethod.OPTIONS:
+      return new CORSResponse("ok");
+    default:
+      return new CORSResponse(null, { status: 404 });
   }
-  const data = {
-    message: `Hello ${name}!`,
-  };
-
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  );
 });

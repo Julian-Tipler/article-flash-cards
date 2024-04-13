@@ -1,12 +1,9 @@
 ** Tools
-React/tailwind/next.js
-
-** Function
-Authentication
-Viewing flashcards
+Cohere
+Supabase
 
 ** Routes
 /cards
-/cards/:id
-/login (I think)
-/profile
+* Sends the text to Cohere Endpoint
+* Creates a new set of cards with the response
+* Returns the new cards :id
