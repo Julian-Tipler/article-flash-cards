@@ -1,4 +1,4 @@
-import { createCards } from "./create-cards";
+import { createCards } from "../helpers/create-cards";
 
 export const displayButton = () => {
   const body = document.querySelector("body");
@@ -9,7 +9,7 @@ export const displayButton = () => {
   button.style.bottom = "0";
   button.style.right = "0";
   button.style.zIndex = "9999";
-  button.style.backgroundColor = "red";
+  button.style.backgroundColor = "blue";
   button.style.color = "white";
   button.style.padding = "10px";
   button.style.border = "none";
@@ -19,15 +19,27 @@ export const displayButton = () => {
   button.style.fontSize = "16px";
   button.style.fontWeight = "bold";
 
-  button.addEventListener("click", async () => {
-    button.innerHTML = "Creating Flashcards...";
-    const success = await createCards();
-    if (success) {
-      button.innerHTML = "Flashcards Created!";
-    } else {
-      button.innerHTML = "Failed to create Flashcards!";
-    }
-  });
+  button.addEventListener("click", handleCreateFlashCards(button));
 
   body.appendChild(button);
+};
+
+const handleCreateFlashCards = (button) => {
+  return async () => {
+    button.innerHTML = "Creating Flashcards...";
+
+    const { cardSetId } = await createCards();
+    if (cardSetId) {
+      button.innerHTML = "Flashcards Created!";
+      button.style.backgroundColor = "green";
+      window.open(
+        `${import.meta.env.VITE_WEB_URL}/cards/${cardSetId}`,
+        "_blank"
+      );
+    } else {
+      button.innerHTML = "Failed to create Flashcards!";
+      button.style.backgroundColor = "red";
+    }
+    button.disabled = true;
+  };
 };

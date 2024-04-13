@@ -4,16 +4,25 @@ export const createCards = async () => {
     import.meta.env.VITE_API_URL +
     "/cards/?userId=" +
     "00000000-0000-0000-0000-000000000000";
-  await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-    },
-    body: JSON.stringify({
-      content: "mock article content",
-    }),
-  })
-    .then((response) => response.ok)
-    .catch((err) => console.error(err));
-}
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        content: "mock article content",
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("API Call was not ok: " + response.statusText);
+    }
+    const { cardSetId } = await response.json();
+    return { cardSetId };
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+};

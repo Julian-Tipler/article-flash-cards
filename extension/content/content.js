@@ -1,4 +1,4 @@
-import { displayButton } from "./helpers/display-button";
+import { displayButton } from "./components/display-button";
 import "./index.css";
 
 console.log("content.js 🚀🚀");

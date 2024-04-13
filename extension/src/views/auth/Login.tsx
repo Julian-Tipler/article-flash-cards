@@ -2,7 +2,7 @@ import "./Login.css";
 
 export const Login = () => {
   const webAuthUrl =
-    import.meta.env.VITE_WEB_AUTH_URL || "http://localhost:5173";
+    import.meta.env.VITE_WEB_URL || "http://localhost:5173";
   return (
     <div className="login-container">
       <p>Login here: No credit card required!</p>

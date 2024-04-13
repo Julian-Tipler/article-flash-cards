@@ -43,7 +43,7 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
     await createCards({ cards, cardSetId });
 
     const response = {
-      Status: "Success",
+      ok: true,
       cardSetId,
     };
     return new CORSResponse(JSON.stringify(response));
