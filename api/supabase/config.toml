@@ -144,7 +144,7 @@ redirect_uri="env(REDIRECT_URL)"
 # url = ""
 
 [analytics]
-enabled = false
+enabled = true
 port = 55327
 vector_port = 54328
 # Configure one of the supported backends: `postgres`, `bigquery`.
