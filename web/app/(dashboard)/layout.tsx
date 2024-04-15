@@ -1,8 +1,16 @@
 import React from "react";
 import { Header } from "./Header";
 import { Navigation } from "./Navigation";
+import { createClient } from "../shared/clients/supabase/supabase-server";
+import { redirect } from "next/navigation";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect("/login");
+  }
+
   return (
     <div className="mx-auto flex h-screen ">
       <Header />
