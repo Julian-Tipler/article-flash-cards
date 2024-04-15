@@ -131,8 +131,8 @@ auth_token = "env(SUPABASE_AUTH_SMS_TWILIO_AUTH_TOKEN)"
 # `twitter`, `slack`, `spotify`, `workos`, `zoom`.
 [auth.external.google]
 enabled=true
-client_id="env(AUTH_GOOGLE_CLIENT_ID)"
-secret="env(AUTH_GOOGLE_SECRET)"
+client_id = "env(AUTH_GOOGLE_CLIENT_ID)"
+secret = "env(AUTH_GOOGLE_SECRET)"
 redirect_uri="env(REDIRECT_URL)"
 
 # DO NOT commit your OAuth provider secret to git. Use environment variable substitution instead:
@@ -144,7 +144,7 @@ redirect_uri="env(REDIRECT_URL)"
 # url = ""
 
 [analytics]
-enabled = false
+enabled = true
 port = 55327
 vector_port = 54328
 # Configure one of the supported backends: `postgres`, `bigquery`.
