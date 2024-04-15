@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { supabase } from "../shared/clients/supabase/supabase";
+import { supabase } from "../shared/clients/supabase/supabase-client";
 
 export const GoogleLoginButton = () => {
   return (
