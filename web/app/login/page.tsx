@@ -1,31 +1,45 @@
+"use client";
 import { createClient } from "../shared/clients/supabase/supabase-server";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { headers } from "next/headers";
+import { supabase } from "../shared/clients/supabase/supabase-client";
+import path from "path";
 
 export default function LoginPage() {
-  const signIn = async () => {
-    "use server";
-    const supabase = createClient();
-    const origin = headers().get("origin");
-    const { error, data } = await supabase.auth.signInWithOAuth({
+  const pathname = usePathname();
+  const redirectTo = process.env.NEXT_PUBLIC_URL + pathname;
+
+  const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo,
       },
     });
-    if (error) {
-      console.log("error", error);
-    } else {
-      return redirect(data.url);
-    }
+  };
+  const signInWithGithub = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo,
+      },
+    });
   };
 
   return (
-    <form
-      action={signIn}
-      className="flex-1 flex min-h-screen justify-center items-center"
-    >
-      <button>Log in With Google</button>
-    </form>
+    <>
+      <form
+        action={signInWithGoogle}
+        className="flex-1 flex justify-center items-center"
+      >
+        <button>Log in With Google</button>
+      </form>
+      <form
+        action={signInWithGithub}
+        className="flex-1 flex justify-center items-center"
+      >
+        <button>Log in With Github</button>
+      </form>
+    </>
   );
 }
