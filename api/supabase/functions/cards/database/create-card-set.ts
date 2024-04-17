@@ -1,12 +1,12 @@
 import { supabase } from "../../_shared/clients/supabase.ts";
 
 export const createCardSet = async (
-  { userId }: { userId: string },
+  { userId, title }: { userId: string; title: string },
 ) => {
   // return cardSetId
   const { data, error } = await supabase.from("cardSets").insert({
     userId: userId,
-    title: "Untitled",
+    title: title,
   }).select("id");
 
   if (error) {

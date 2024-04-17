@@ -34,7 +34,7 @@ const handleCreateFlashCards = (button) => {
       button.innerHTML = "Flashcards Created!";
       button.style.backgroundColor = "green";
       window.open(
-        `${import.meta.env.VITE_WEB_URL}/cards/${cardSetId}`,
+        `${import.meta.env.VITE_WEB_URL}/sets/${cardSetId}`,
         "_blank"
       );
     } else {
@@ -44,6 +44,7 @@ const handleCreateFlashCards = (button) => {
     button.disabled = true;
   };
 };
+
 
 const extractArticleText = () => {
   // Common content selectors: These should be adjusted based on common patterns found in your target pages.

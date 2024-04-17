@@ -6,6 +6,7 @@ import { supabase } from "../shared/clients/supabase/supabase-client";
 import path from "path";
 
 export default function LoginPage() {
+  console.log("LOGIN PAGE")
   const pathname = usePathname();
   const redirectTo = process.env.NEXT_PUBLIC_URL + pathname;
 

@@ -3,7 +3,7 @@ import { CORSResponse } from "../../_shared/utils/cors.ts";
 import { validate } from "../../_shared/utils/validate.ts";
 import { object, ObjectSchema, string } from "https://esm.sh/yup@1.2.0";
 import { cohereCompletion } from "../cohere/cohere-completion.ts";
-import { parseCompletion } from "../helpers/parse-completion.ts";
+import { parseFlashcards } from "../helpers/parse-flash-cards.ts";
 import { createCardSet } from "../database/create-card-set.ts";
 import { createCards } from "../database/create-cards.ts";
 import { generatePrompt } from "../cohere/flashcard-prompt.ts";
@@ -29,15 +29,15 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
     const { content }: { content: string } = await req.body;
 
     const prompt = generatePrompt({ content });
-    const { toolCalls } = await cohereCompletion({ prompt });
+    const { text } = await cohereCompletion({ prompt });
 
-    if (!toolCalls) {
+    if (!text) {
       throw new Error("Failed to generate completion");
     }
 
-    const { cards } = parseCompletion({ toolCalls });
+    const { cards, title } = parseFlashcards({ text });
 
-    const { cardSetId } = await createCardSet({ userId });
+    const { cardSetId } = await createCardSet({ userId, title });
 
     await createCards({ cards, cardSetId });
 

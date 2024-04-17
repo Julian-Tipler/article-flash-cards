@@ -2,18 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../shared/clients/supabase/supabase-client";
 import { User } from "@supabase/supabase-js";
-import LoginPage from "../login/page";
 import { redirect, usePathname } from "next/navigation";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  console.log("PROTECTED LAYOUT");
   const [user, setUser] = useState<User | undefined>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      session;
-      if (session?.user) {
-        setUser(session?.user);
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        setUser(user);
       }
       setLoading(false);
     });
@@ -28,12 +27,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const pathname = usePathname();
+  console.log("USER", user);
 
   if (loading) {
     return <div>Loading...</div>;
   }
   if (!user) {
-    redirect(`/login/?redirectTo=${pathname}`);
+    redirect(`/login/?redirectTo=${encodeURIComponent(pathname)}`);
   } else {
     return <div>{children}</div>;
   }
