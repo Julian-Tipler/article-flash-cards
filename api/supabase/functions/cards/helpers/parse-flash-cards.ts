@@ -1,32 +1,33 @@
-type FlashCard = {
+type Card = {
   front: string;
   back: string;
 };
 
-type FlashCardSet = {
+type CardSet = {
   title: string;
-  cards: FlashCard[];
+  cards: Card[];
 };
 
-export function parseFlashcards({ text }: { text: string }): FlashCardSet {
-  // Extract title using regex
-  const titleMatch = text.match(/title:\s*"([^"]+)"/);
+export function parseFlashCards({ text }: { text: string }): CardSet {
+  console.log(text);
+  const titleRegex = /title:\s*"([^"]+)"/;
+  const titleMatch = text.match(titleRegex);
   if (!titleMatch) {
-    throw new Error("Title not found in the text.");
+    throw new Error("No title found in the text.");
   }
   const title = titleMatch[1];
 
-  // Extract cards
-  const cardRegex = /\d+\.\s*front:\s*"([^"]+)"\s*back:\s*"([^"]+)"/g;
+  // Update regex to accommodate the comma between 'front' and 'back'
+  const cardRegex = /\*\s*front:\s*"([^"]+)",\s*back:\s*"([^"]+)"/g;
   let match;
-  const cards: FlashCard[] = [];
+  const cards: Card[] = [];
 
+  // Loop over all matches of the card pattern
   while ((match = cardRegex.exec(text)) !== null) {
     const front = match[1];
     const back = match[2];
     cards.push({ front, back });
   }
-  console.log("CARDS", cards);
+
   return { title, cards };
 }
- 

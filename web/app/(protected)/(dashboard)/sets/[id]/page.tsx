@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Card } from "./Card";
+import { FlipCard } from "./FlipCard";
 
 const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = React.useState([]);
@@ -38,7 +38,12 @@ const Cards = ({ params }: { params: { id: string } }) => {
     <div>
       <div>{cardSet.title}</div>
       {cards.map((card: any) => (
-        <Card key={card.id} id={card.id} front={card.front} back={card.back} />
+        <FlipCard
+          key={card.id}
+          id={card.id}
+          front={card.front}
+          back={card.back}
+        />
       ))}
     </div>
   );

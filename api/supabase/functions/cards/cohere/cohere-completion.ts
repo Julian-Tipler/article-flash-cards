@@ -7,7 +7,6 @@ export const cohereCompletion = async ({ prompt }: { prompt: string }) => {
     promptTruncation: Cohere.ChatRequestPromptTruncation.Off,
     temperature: 0.3,
   });
-  console.log("TEXT", completion.text)
   return {
     text: completion.text,
   };

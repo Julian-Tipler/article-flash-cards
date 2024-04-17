@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect } from "react";
+import Link from "next/link";
 
 const Cards = ({ params }: { params: { id: string } }) => {
   const [sets, setSets] = React.useState([]);
   const { id } = params;
+
   useEffect(() => {
     fetch(`http://127.0.0.1:55321/functions/v1/cards`, {
       method: "GET",
@@ -31,14 +33,11 @@ const Cards = ({ params }: { params: { id: string } }) => {
   }, [id]);
 
   if (!sets) return <div>Failed to fetch data</div>;
-  console.log(sets);
   return (
     <div>
       {sets.map((set: any) => (
         <div key={set.id}>
-          <div>
-            <h1>{set.title}</h1>
-          </div>
+          <Link href={`/sets/${set.id}`}>{set.title}</Link>
         </div>
       ))}
     </div>

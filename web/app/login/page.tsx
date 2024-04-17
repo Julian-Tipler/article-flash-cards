@@ -1,12 +1,9 @@
 "use client";
-import { createClient } from "../shared/clients/supabase/supabase-server";
-import { redirect, usePathname } from "next/navigation";
-import { headers } from "next/headers";
+import { usePathname } from "next/navigation";
 import { supabase } from "../shared/clients/supabase/supabase-client";
-import path from "path";
 
 export default function LoginPage() {
-  console.log("LOGIN PAGE")
+  console.log("LOGIN PAGE");
   const pathname = usePathname();
   const redirectTo = process.env.NEXT_PUBLIC_URL + pathname;
 
