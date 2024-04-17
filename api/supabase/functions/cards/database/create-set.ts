@@ -1,10 +1,9 @@
 import { supabase } from "../../_shared/clients/supabase.ts";
 
-export const createCardSet = async (
+export const createSet = async (
   { userId, title }: { userId: string; title: string },
 ) => {
-  // return cardSetId
-  const { data, error } = await supabase.from("cardSets").insert({
+  const { data, error } = await supabase.from("sets").insert({
     userId: userId,
     title: title,
   }).select("id");
@@ -15,5 +14,5 @@ export const createCardSet = async (
   if (!data) {
     throw new Error("Failed to create card set");
   }
-  return { cardSetId: data[0].id };
+  return { setId: data[0].id };
 };

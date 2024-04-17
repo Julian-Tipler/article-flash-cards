@@ -19,8 +19,8 @@ export const createCards = async (articleText) => {
     if (!response.ok) {
       throw new Error("API Call was not ok: " + response.statusText);
     }
-    const { cardSetId } = await response.json();
-    return { cardSetId };
+    const { setId } = await response.json();
+    return { setId };
   } catch (error) {
     console.error(error);
     return {};

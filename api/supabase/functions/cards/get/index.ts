@@ -6,24 +6,23 @@ import { readSet } from "../database/read-set.ts";
 
 interface Req {
   params: {
-    cardSetId: string;
+    setId: string;
   };
 }
 
 const schema: ObjectSchema<Req> = object({
-  params: object({ cardSetId: string().required() }),
+  params: object({ setId: string().required() }),
 });
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const { cardSetId } = req.params;
+    const { setId } = req.params;
 
-    const { cards, cardSet } = await readSet({ cardSetId });
+    const { cards, set } = await readSet({ setId });
     const response = {
       cards,
-      cardSet,
+      set,
     };
-    console.log("RESPONSE", response);
     return new CORSResponse(JSON.stringify(response));
   } catch (error) {
     console.error(error);

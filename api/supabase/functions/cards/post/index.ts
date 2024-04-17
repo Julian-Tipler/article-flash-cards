@@ -4,7 +4,7 @@ import { validate } from "../../_shared/utils/validate.ts";
 import { object, ObjectSchema, string } from "https://esm.sh/yup@1.2.0";
 import { cohereCompletion } from "../cohere/cohere-completion.ts";
 import { parseFlashCards } from "../helpers/parse-flash-cards.ts";
-import { createCardSet } from "../database/create-card-set.ts";
+import { createSet } from "../database/create-set.ts";
 import { createCards } from "../database/create-cards.ts";
 import { generatePrompt } from "../cohere/flashcard-prompt.ts";
 interface Req {
@@ -37,12 +37,12 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
 
     const { cards, title } = parseFlashCards({ text });
 
-    const { cardSetId } = await createCardSet({ userId, title });
+    const { setId } = await createSet({ userId, title });
 
-    await createCards({ cards, cardSetId });
+    await createCards({ cards, setId });
 
     const response = {
-      cardSetId,
+      setId,
     };
     return new CORSResponse(JSON.stringify(response));
   } catch (error) {

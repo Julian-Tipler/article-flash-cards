@@ -1,28 +1,28 @@
 import { supabase } from "../../_shared/clients/supabase.ts";
 
 export const readSet = async (
-  { cardSetId }: {
-    cardSetId: string;
+  { setId }: {
+    setId: string;
   },
 ) => {
   const { data, error } = await supabase.from("cards").select("*").eq(
-    "cardSetId",
-    cardSetId,
+    "setId",
+    setId,
   );
-  const { data: cardSetData, error: cardSetError } = await supabase.from(
-    "cardSets",
+  const { data: setData, error: setError } = await supabase.from(
+    "sets",
   ).select("*").eq(
     "id",
-    cardSetId,
+    setId,
   ).single();
   if (error) {
     throw error;
   }
-  if (cardSetError) {
-    throw cardSetError;
+  if (setError) {
+    throw setError;
   }
   return {
     cards: data,
-    cardSet: cardSetData,
+    set: setData,
   };
 };

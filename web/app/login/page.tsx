@@ -1,11 +1,15 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname, useSearchParams } from "next/navigation";
 import { supabase } from "../shared/clients/supabase/supabase-client";
 
 export default function LoginPage() {
-  console.log("LOGIN PAGE");
-  const pathname = usePathname();
-  const redirectTo = process.env.NEXT_PUBLIC_URL + pathname;
+  // grab the redirect path from the current URL
+
+  const params = useSearchParams();
+  const redirectToParam = params.get("redirectTo");
+  console.log("redirectTO", redirectToParam);
+  const redirectTo = (process.env.NEXT_PUBLIC_WEB_URL || "") + redirectToParam;
+  console.log("redirectTO)))", redirectToParam);
 
   const signInWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({

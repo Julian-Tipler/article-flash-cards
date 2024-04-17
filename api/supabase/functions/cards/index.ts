@@ -14,7 +14,7 @@ serve(async (req: Request) => {
       // extract params from the req
       const url = new URL(req.url);
       const params = Object.fromEntries(url.searchParams.entries());
-      if (params.cardSetId) {
+      if (params.setId) {
         return await getSet(req);
       } else {
         return await getSets(req);

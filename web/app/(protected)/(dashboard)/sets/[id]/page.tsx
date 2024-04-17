@@ -4,10 +4,10 @@ import { FlipCard } from "./FlipCard";
 
 const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = React.useState([]);
-  const [cardSet, setCardSet] = React.useState({});
+  const [set, setSet] = React.useState({});
   const { id } = params;
   useEffect(() => {
-    fetch(`http://127.0.0.1:55321/functions/v1/cards/?cardSetId=${id}`, {
+    fetch(`http://127.0.0.1:55321/functions/v1/cards/?setId=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const Cards = ({ params }: { params: { id: string } }) => {
       })
       .then((data) => {
         setCards(data.cards);
-        setCardSet(data.cardSet);
+        setSet(data.set);
       })
       .catch((error) => {
         if (error.name === `AbortError`) {
@@ -32,18 +32,15 @@ const Cards = ({ params }: { params: { id: string } }) => {
         return { error: error.message };
       });
   }, [id]);
+  console.log("set", set);
 
-  if (!cards) return <div>Failed to fetch data</div>;
+  if (!cards || !set) return <div>Failed to fetch data</div>;
+
   return (
-    <div>
-      <div>{cardSet.title}</div>
+    <div className="flex flex-col gap-3 items-center">
+      <div>{set.title}</div>
       {cards.map((card: any) => (
-        <FlipCard
-          key={card.id}
-          id={card.id}
-          front={card.front}
-          back={card.back}
-        />
+        <FlipCard key={card.id} front={card.front} back={card.back} />
       ))}
     </div>
   );

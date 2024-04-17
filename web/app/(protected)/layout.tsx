@@ -5,7 +5,6 @@ import { User } from "@supabase/supabase-js";
 import { redirect, usePathname } from "next/navigation";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  console.log("PROTECTED LAYOUT");
   const [user, setUser] = useState<User | undefined>();
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +26,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const pathname = usePathname();
-  console.log("USER", user);
 
   if (loading) {
     return <div>Loading...</div>;

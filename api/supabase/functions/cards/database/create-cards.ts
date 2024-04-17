@@ -1,14 +1,14 @@
 import { supabase } from "../../_shared/clients/supabase.ts";
 
 export const createCards = async (
-  { cards, cardSetId }: {
+  { cards, setId }: {
     cards: any;
-    cardSetId: string;
+    setId: string;
   },
 ) => {
   const { data, error } = await supabase.from("cards").insert(
     cards.map((card: any) => ({
-      cardSetId,
+      setId,
       ...card,
     })),
   );

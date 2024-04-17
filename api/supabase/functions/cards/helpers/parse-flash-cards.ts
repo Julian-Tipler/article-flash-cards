@@ -3,13 +3,12 @@ type Card = {
   back: string;
 };
 
-type CardSet = {
+type Set = {
   title: string;
   cards: Card[];
 };
 
-export function parseFlashCards({ text }: { text: string }): CardSet {
-  console.log(text);
+export function parseFlashCards({ text }: { text: string }): Set {
   const titleRegex = /title:\s*"([^"]+)"/;
   const titleMatch = text.match(titleRegex);
   if (!titleMatch) {

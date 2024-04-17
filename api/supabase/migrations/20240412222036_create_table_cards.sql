@@ -3,5 +3,6 @@ CREATE TABLE
         "id" UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         "front" TEXT NOT NULL,
         "back" TEXT NOT NULL,
-        "cardSetId" UUID REFERENCES public."cardSets" NOT NULL
+        "setId" UUID REFERENCES public."sets" NOT NULL,
+        "createdAt" timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP
     );

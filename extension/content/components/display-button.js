@@ -29,14 +29,11 @@ const handleCreateFlashCards = (button) => {
     button.innerHTML = "Creating Flashcards...";
 
     const articleText = extractArticleText();
-    const { cardSetId } = await createCards(articleText);
-    if (cardSetId) {
+    const { setId } = await createCards(articleText);
+    if (setId) {
       button.innerHTML = "Flashcards Created!";
       button.style.backgroundColor = "green";
-      window.open(
-        `${import.meta.env.VITE_WEB_URL}/sets/${cardSetId}`,
-        "_blank"
-      );
+      window.open(`${import.meta.env.VITE_WEB_URL}/sets/${setId}`, "_blank");
     } else {
       button.innerHTML = "Failed to create Flashcards!";
       button.style.backgroundColor = "red";
@@ -44,7 +41,6 @@ const handleCreateFlashCards = (button) => {
     button.disabled = true;
   };
 };
-
 
 const extractArticleText = () => {
   // Common content selectors: These should be adjusted based on common patterns found in your target pages.
