@@ -4,13 +4,6 @@ import { FlipCard } from "./FlipCard";
 import { Title } from "@/app/shared/components/Title";
 import EmblaCarousel from "./EmblaCarousel";
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-};
-
 export type Card = {
   id: string;
   front: string;
@@ -19,8 +12,7 @@ export type Card = {
 
 const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = useState<Card[]>([]);
-  const [set, setSet] = useState({});
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [set, setSet] = useState<Record<string, any>>({});
 
   const { id } = params;
 
