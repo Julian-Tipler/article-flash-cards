@@ -1,4 +1,10 @@
-import React, { ReactNode } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useEffect,
+} from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import {
@@ -6,7 +12,7 @@ import {
   NextButton,
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import { Card } from "./page";
 import "./EmblaCarousel.css";
 
@@ -15,8 +21,15 @@ type PropType = {
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+const EmblaCarousel: React.FC<PropType> = ({
+  slides,
+  options,
+  setCurrentSlide,
+}: {
+  slides: ReactNode[];
+  options: EmblaOptionsType;
+  setCurrentSlide: Dispatch<SetStateAction<number>>;
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -28,6 +41,33 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onPrevButtonClick,
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      console.log(event.key);
+      if (event.key === "ArrowLeft") {
+        onPrevButtonClick();
+      } else if (event.key === "ArrowRight") {
+        onNextButtonClick();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onPrevButtonClick, onNextButtonClick]);
+
+  const logSlidesInView = useCallback(
+    (emblaApi: any) => {
+      const slidesInView = emblaApi.slidesInView();
+      console.log("api", slidesInView);
+      setCurrentSlide(slidesInView[0]);
+    },
+    [setCurrentSlide]
+  );
+  useEffect(() => {
+    if (emblaApi) emblaApi.on("slidesInView", logSlidesInView);
+  }, [emblaApi, logSlidesInView]);
 
   return (
     <section className="embla">
@@ -45,18 +85,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={"embla__dot".concat(
-                index === selectedIndex ? " embla__dot--selected" : ""
-              )}
-            />
-          ))}
         </div>
       </div>
     </section>

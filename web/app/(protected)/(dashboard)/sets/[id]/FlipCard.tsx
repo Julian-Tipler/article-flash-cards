@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "./FlipCard.css";
 
-export const FlipCard = ({ front, back }: { front: string; back: string }) => {
+export const FlipCard = ({
+  front,
+  back,
+  currentSlide,
+  index,
+}: {
+  front: string;
+  back: string;
+  currentSlide: number;
+}) => {
+  console.log("CURRENT SLIDE INSIDE CARD", index, currentSlide);
+
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.keyCode === 32) {
-        // keyCode for spacebar
-        event.preventDefault(); // Prevent the default action (scroll down)
+      if (event.key === " ") {
+        if (currentSlide === index) {
+          console.log(index);
+          setIsFlipped((prev) => !prev);
+        }
       }
     };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -19,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        src="https://kit.fontawesome.com/7c368e1b59.js"
+      />
       <body className={`${roboto.className} overscroll-y-none`}>
         {children}
       </body>

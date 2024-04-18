@@ -13,6 +13,7 @@ export type Card = {
 const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = useState<Card[]>([]);
   const [set, setSet] = useState<Record<string, any>>({});
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const { id } = params;
 
@@ -42,28 +43,31 @@ const Cards = ({ params }: { params: { id: string } }) => {
         return { error: error.message };
       });
   }, [id]);
-
+  console.log("CURRENT SLIDE", currentSlide);
   if (!cards.length || !set) return <div>Fetching data</div>;
-  const slides = cards.map((card, index) => (
-    <FlipCard key={`card-${index}`} front={card.front} back={card.back} />
-  ));
+  const slides = cards.map((card, index) => {
+    console.log("CURRENT SLIDE OUTSIDE CARD", index, currentSlide);
+
+    return (
+      <FlipCard
+        key={`card-${index}`}
+        front={card.front}
+        back={card.back}
+        currentSlide={currentSlide}
+        index={index}
+      />
+    );
+  });
   return (
     <div className="flex flex-col items-center">
       <Title>{set.title}</Title>
-      <EmblaCarousel slides={slides} options={{}} />
+      <EmblaCarousel
+        slides={slides}
+        options={{}}
+        setCurrentSlide={setCurrentSlide}
+      />
     </div>
   );
 };
 
 export default Cards;
-
-// switch (event.keyCode) {
-//   case 37: // Left arrow
-//     handlePrev();
-//     break;
-//   case 39: // Right arrow
-//     handleNext();
-//     break;
-//   default:
-//     break;
-// }
