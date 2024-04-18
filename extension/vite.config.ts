@@ -31,6 +31,10 @@ export default defineConfig({
             assetInfo.name.endsWith(".css")
           ) {
             return "content/content.css";
+          } else if(
+            assetInfo.name.includes(".png") 
+          ) {
+            return "assets/[name][extname]";
           }
           // Default asset file name pattern
           return "assets/[name]-[hash][extname]";
