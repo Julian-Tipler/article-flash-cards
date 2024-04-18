@@ -34,11 +34,13 @@ const Cards = ({ params }: { params: { id: string } }) => {
 
   if (!sets) return <div>Failed to fetch data</div>;
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {sets.map((set: any) => (
-        <div key={set.id}>
-          <Link href={`/sets/${set.id}`}>{set.title}</Link>
-        </div>
+        <Link key={set.id} href={`/sets/${set.id}`} className="truncate">
+          <div className="bg-background-white p-4 flex items-center max-w-2xl truncate rounded-lg">
+            {set.title}
+          </div>
+        </Link>
       ))}
     </div>
   );

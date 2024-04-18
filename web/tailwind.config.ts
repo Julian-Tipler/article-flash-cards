@@ -19,8 +19,9 @@ const config: Config = {
       },
       colors: {
         "background-nav": "#1C2434",
-        "background-dashboard": "#F1F5F9",
+        "background-dash": "#F1F5F9",
         "background-white": "white",
+        "border": "gray",
       },
     },
   },

@@ -4,9 +4,10 @@
 }
 
 .flip-card-container {
-  width: 300px;
-  height: 200px;
   cursor: pointer;
+  width: 600px;
+  height: 400px;
+  margin-bottom: 10px;
 }
 
 .flip-card-inner {
@@ -16,12 +17,11 @@
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
 }
 
 .flip-card-container.flipped .flip-card-inner {
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .flip-card-front,
@@ -35,13 +35,11 @@
   justify-content: center;
   background-color: white;
   border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
 }
 
-.flip-card-front {
-  color: black;
-}
-
+/* back is pre twisted */
 .flip-card-back {
-  color: black;
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
