@@ -1,5 +1,4 @@
 import { createCards } from "../api/create-cards";
-import wiseIcon from "../icon.png";
 import "./button.css";
 
 export const displayCollapsedIconAndButton = () => {
@@ -7,7 +6,9 @@ export const displayCollapsedIconAndButton = () => {
   const body = document.querySelector("body");
   const icon = document.createElement("button");
   icon.className = "wise-icon";
-  icon.style.backgroundImage = `url(${chrome.runtime.getURL("assets/icon.png")})`; // Set the background image using the imported path
+  icon.style.backgroundImage = `url(${chrome.runtime.getURL(
+    "assets/icon.png"
+  )})`; // Set the background image using the imported path
   icon.style.backgroundSize = "cover";
   body.appendChild(icon);
   // Display a button upon clicking the icon
