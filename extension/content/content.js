@@ -1,4 +1,4 @@
-import { displayButton } from "./components/display-button";
+import { displayCollapsedIconAndButton } from "./components/display-button";
 import "./index.css";
 
 console.log("content.js 🚀🚀🚀");
@@ -8,5 +8,5 @@ window.addEventListener("load", () => {
 });
 
 function init() {
-  displayButton();
+  displayCollapsedIconAndButton();
 }

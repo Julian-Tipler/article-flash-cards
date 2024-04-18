@@ -43,11 +43,8 @@ const Cards = ({ params }: { params: { id: string } }) => {
         return { error: error.message };
       });
   }, [id]);
-  console.log("CURRENT SLIDE", currentSlide);
   if (!cards.length || !set) return <div>Fetching data</div>;
   const slides = cards.map((card, index) => {
-    console.log("CURRENT SLIDE OUTSIDE CARD", index, currentSlide);
-
     return (
       <FlipCard
         key={`card-${index}`}

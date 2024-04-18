@@ -11,8 +11,6 @@ export const FlipCard = ({
   back: string;
   currentSlide: number;
 }) => {
-  console.log("CURRENT SLIDE INSIDE CARD", index, currentSlide);
-
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {

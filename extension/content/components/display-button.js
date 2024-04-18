@@ -1,25 +1,24 @@
 import { createCards } from "../api/create-cards";
 
-export const displayButton = () => {
+import "./button.css";
+
+export const displayCollapsedIconAndButton = () => {
+  // Display the icon
   const body = document.querySelector("body");
-  // display a button just above the body of the page
+  const icon = document.createElement("button");
+  icon.className = "wise-icon";
+  icon.innerHTML = "***";
+  body.appendChild(icon);
+
+  // Display a button upon clicking the icon
   const button = document.createElement("button");
+  button.className = "wise-create-flashcards-button wise-button-hidden";
   button.innerHTML = "Create Flashcards";
-  button.style.position = "fixed";
-  button.style.bottom = "0";
-  button.style.right = "0";
-  button.style.zIndex = "9999";
-  button.style.backgroundColor = "blue";
-  button.style.color = "white";
-  button.style.padding = "10px";
-  button.style.border = "none";
-  button.style.cursor = "pointer";
-  button.style.borderRadius = "5px";
-  button.style.margin = "10px";
-  button.style.fontSize = "16px";
-  button.style.fontWeight = "bold";
 
   button.addEventListener("click", handleCreateFlashCards(button));
+  icon.addEventListener("click", () => {
+    button.classList.remove("wise-button-hidden");
+  });
 
   body.appendChild(button);
 };
