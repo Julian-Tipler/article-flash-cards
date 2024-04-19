@@ -4,12 +4,10 @@ import "./FlipCard.css";
 export const FlipCard = ({
   front,
   back,
-  currentSlide,
   flippable,
 }: {
   front: string;
   back: string;
-  currentSlide: number;
   flippable: boolean;
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);

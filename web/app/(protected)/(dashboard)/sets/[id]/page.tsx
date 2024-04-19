@@ -10,9 +10,14 @@ export type Card = {
   back: string;
 };
 
+export type Set = {
+  id: string;
+  title: string;
+};
+
 const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = useState<Card[]>([]);
-  const [set, setSet] = useState<Record<string, any>>({});
+  const [set, setSet] = useState<Set | null>(null);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const { id } = params;
@@ -39,28 +44,24 @@ const Cards = ({ params }: { params: { id: string } }) => {
         if (error.name === `AbortError`) {
           return { aborted: true };
         }
-        console.error("FETCH regular error", error);
+        console.error(error);
         return { error: error.message };
       });
   }, [id]);
   if (!cards.length || !set) return <div>Fetching cards...</div>;
-  const slides = cards
-    .map((card, index) => {
-      return (
-        <FlipCard
-          key={`card-${index}`}
-          front={card.front}
-          back={card.back}
-          currentSlide={currentSlide}
-          flippable={index === currentSlide}
-        />
-      );
-    })
-    .slice(0, 5);
-  // TODO remove slice
+  const slides = cards.map((card, index) => {
+    return (
+      <FlipCard
+        key={`card-${index}`}
+        front={card.front}
+        back={card.back}
+        flippable={index === currentSlide}
+      />
+    );
+  });
   return (
     <div className="flex flex-col items-center">
-      <Title>{set.title}</Title>
+      <Title text={set.title} />
       <EmblaCarousel
         slides={slides}
         options={{}}

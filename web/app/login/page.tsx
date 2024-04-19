@@ -1,5 +1,5 @@
 "use client";
-import { redirect, usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "../shared/clients/supabase/supabase-client";
 
 export default function LoginPage() {
@@ -9,17 +9,16 @@ export default function LoginPage() {
   const redirectToParam = params.get("redirectTo");
   const redirectTo = (process.env.NEXT_PUBLIC_WEB_URL || "") + redirectToParam;
 
-  const signInWithGoogle = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithOAuth({
+  const signInWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo,
       },
     });
   };
-  const signInWithGithub = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+  const signInWithGithub = async () => {
+    await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
         redirectTo,
