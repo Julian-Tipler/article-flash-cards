@@ -18,12 +18,13 @@ import "./EmblaCarousel.css";
 
 type PropType = {
   slides: ReactNode[];
-  options?: EmblaOptionsType;
+  options: EmblaOptionsType;
+  setCurrentSlide: Dispatch<SetStateAction<number>>;
 };
 
 const EmblaCarousel: React.FC<PropType> = ({
   slides,
-  options,
+  options = {},
   setCurrentSlide,
 }: {
   slides: ReactNode[];
@@ -31,9 +32,6 @@ const EmblaCarousel: React.FC<PropType> = ({
   setCurrentSlide: Dispatch<SetStateAction<number>>;
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
 
   const {
     prevBtnDisabled,
@@ -44,7 +42,6 @@ const EmblaCarousel: React.FC<PropType> = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      console.log(event.key);
       if (event.key === "ArrowLeft") {
         onPrevButtonClick();
       } else if (event.key === "ArrowRight") {
@@ -57,17 +54,13 @@ const EmblaCarousel: React.FC<PropType> = ({
     };
   }, [onPrevButtonClick, onNextButtonClick]);
 
-  const logSlidesInView = useCallback(
-    (emblaApi: any) => {
-      const slidesInView = emblaApi.slidesInView();
-      console.log("api", slidesInView);
-      setCurrentSlide(slidesInView[0]);
-    },
-    [setCurrentSlide]
-  );
   useEffect(() => {
+    const logSlidesInView = (emblaApi: any) => {
+      const slidesInView = emblaApi.slidesInView();
+      setCurrentSlide(slidesInView[0]);
+    };
     if (emblaApi) emblaApi.on("slidesInView", logSlidesInView);
-  }, [emblaApi, logSlidesInView]);
+  }, [emblaApi, setCurrentSlide]);
 
   return (
     <section className="embla">

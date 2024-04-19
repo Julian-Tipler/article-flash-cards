@@ -7,9 +7,7 @@ export default function LoginPage() {
 
   const params = useSearchParams();
   const redirectToParam = params.get("redirectTo");
-  console.log("redirectTO", redirectToParam);
   const redirectTo = (process.env.NEXT_PUBLIC_WEB_URL || "") + redirectToParam;
-  console.log("redirectTO)))", redirectToParam);
 
   const signInWithGoogle = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

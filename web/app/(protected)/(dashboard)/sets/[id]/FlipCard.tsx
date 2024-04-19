@@ -5,19 +5,19 @@ export const FlipCard = ({
   front,
   back,
   currentSlide,
-  index,
+  flippable,
 }: {
   front: string;
   back: string;
   currentSlide: number;
+  flippable: boolean;
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === " ") {
-        if (currentSlide === index) {
-          console.log(index);
+        if (flippable) {
           setIsFlipped((prev) => !prev);
         }
       }
@@ -30,7 +30,7 @@ export const FlipCard = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFlipped]); // Depend on isFlipped to ensure updated state
+  }, [isFlipped, flippable]); // Depend on isFlipped to ensure updated state
 
   return (
     <div className="perspective">

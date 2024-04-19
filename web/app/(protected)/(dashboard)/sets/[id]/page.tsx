@@ -44,17 +44,20 @@ const Cards = ({ params }: { params: { id: string } }) => {
       });
   }, [id]);
   if (!cards.length || !set) return <div>Fetching cards...</div>;
-  const slides = cards.map((card, index) => {
-    return (
-      <FlipCard
-        key={`card-${index}`}
-        front={card.front}
-        back={card.back}
-        currentSlide={currentSlide}
-        index={index}
-      />
-    );
-  });
+  const slides = cards
+    .map((card, index) => {
+      return (
+        <FlipCard
+          key={`card-${index}`}
+          front={card.front}
+          back={card.back}
+          currentSlide={currentSlide}
+          flippable={index === currentSlide}
+        />
+      );
+    })
+    .slice(0, 5);
+  // TODO remove slice
   return (
     <div className="flex flex-col items-center">
       <Title>{set.title}</Title>
