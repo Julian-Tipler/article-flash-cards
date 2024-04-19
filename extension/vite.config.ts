@@ -25,6 +25,7 @@ export default defineConfig({
         },
         chunkFileNames: "assets/[name]-[hash].js",
         assetFileNames: (assetInfo) => {
+          console.log(assetInfo.name)
           // Check if the asset is a CSS file and if it is being imported by 'content'
           if (
             assetInfo.name.includes("content") &&

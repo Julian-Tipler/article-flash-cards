@@ -1,5 +1,6 @@
 import { createCards } from "../api/create-cards";
 import "./button.css";
+import "../icon.png"
 
 export const displayCollapsedIconAndButton = () => {
   // Display the icon

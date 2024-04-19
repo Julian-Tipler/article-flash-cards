@@ -43,7 +43,7 @@ const Cards = ({ params }: { params: { id: string } }) => {
         return { error: error.message };
       });
   }, [id]);
-  if (!cards.length || !set) return <div>Fetching data</div>;
+  if (!cards.length || !set) return <div>Fetching cards...</div>;
   const slides = cards.map((card, index) => {
     return (
       <FlipCard

@@ -38,9 +38,9 @@ export const FlipCard = ({
         className={`flip-card-container ${isFlipped ? "flipped" : ""}`}
         onClick={() => setIsFlipped((prev) => !prev)}
       >
-        <div className="flip-card-inner">
-          <div className="flip-card-front">{front}</div>
-          <div className="flip-card-back">{back}</div>
+        <div className="flip-card-inner text-lg">
+          <div className="flip-card-front px-6">{front}</div>
+          <div className="flip-card-back px-6">{back}</div>
         </div>
       </div>
     </div>
