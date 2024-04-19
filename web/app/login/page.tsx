@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { supabase } from "../shared/clients/supabase/supabase-client";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   // grab the redirect path from the current URL
@@ -67,4 +68,3 @@ export default function LoginPage() {
     </div>
   );
 }
-("937486758194-sqkqtdb84d3asjjhrig9evlejb84alo9.apps.googleusercontent.com");
