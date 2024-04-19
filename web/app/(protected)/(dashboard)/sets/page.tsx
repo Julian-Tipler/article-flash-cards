@@ -7,7 +7,7 @@ const Cards = ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:55321/functions/v1/cards`, {
+    fetch(process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/v1/cards`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

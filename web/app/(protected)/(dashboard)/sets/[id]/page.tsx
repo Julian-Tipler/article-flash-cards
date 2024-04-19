@@ -23,13 +23,16 @@ const Cards = ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:55321/functions/v1/cards/?setId=${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-      },
-    })
+    fetch(
+      process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/v1/cards/?setId=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

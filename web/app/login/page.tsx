@@ -3,7 +3,15 @@ import { useSearchParams } from "next/navigation";
 import { supabase } from "../shared/clients/supabase/supabase-client";
 import { Suspense } from "react";
 
-export default function LoginPage() {
+export default function LoginPageSuspense() {
+  return (
+    <Suspense>
+      <LoginPage />
+    </Suspense>
+  );
+}
+
+function LoginPage() {
   // grab the redirect path from the current URL
 
   const params = useSearchParams();
