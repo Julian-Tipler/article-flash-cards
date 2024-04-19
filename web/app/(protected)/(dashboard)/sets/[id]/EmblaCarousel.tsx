@@ -2,18 +2,15 @@ import React, {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useCallback,
   useEffect,
 } from "react";
 import { EmblaOptionsType } from "embla-carousel";
-import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
-import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
-import { Card } from "./page";
+import useEmblaCarousel from "embla-carousel-react";
 import "./EmblaCarousel.css";
 
 type PropType = {

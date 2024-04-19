@@ -59,6 +59,7 @@ type PropType = PropsWithChildren<
 
 export const PrevButton: React.FC<PropType> = (props) => {
   const { children, ...restProps } = props;
+  console.log(restProps)
 
   return (
     <button
