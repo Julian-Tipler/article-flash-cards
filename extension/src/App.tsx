@@ -36,7 +36,7 @@ const App = () => {
       ],
     },
   ]);
-  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
+  return <RouterProvider router={router} fallbackElement={<></>} />;
 };
 
 async function protectedLoader() {
@@ -56,7 +56,7 @@ async function protectedLoader() {
 }
 const isAuthenticated = async (): Promise<Session | false> => {
   return new Promise((resolve) => {
-    chrome.storage.local.get(["wiseSessionToken"], function (result) {
+    chrome.storage.local.get(["wiseSessionToken"], function(result) {
       if (result.wiseSessionToken) {
         resolve(result.wiseSessionToken);
       } else {

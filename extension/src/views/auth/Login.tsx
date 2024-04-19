@@ -16,6 +16,7 @@ export const Login = () => {
       <a href={webAuthUrl} target="_blank" rel="noopener">
         <button className="submit-button">Login Here</button>
       </a>
+      <p className="wise-help-text">Action button is on the bottom right of the screen.</p>
     </div>
   );
 };
