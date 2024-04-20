@@ -24,7 +24,7 @@ const Cards = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     fetch(
-      process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/v1/cards/?setId=${id}`,
+      process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/cards/?setId=${id}`,
       {
         method: "GET",
         headers: {

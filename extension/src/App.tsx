@@ -5,8 +5,7 @@ import {
   redirect,
 } from "react-router-dom";
 import { Login } from "./views/auth/Login";
-import { Session } from "@supabase/supabase-js";
-import { supabase } from "./clients/supabase";
+import { supabase } from "./clients/supabase-client";
 import { Splash } from "./views/Splash";
 // import { MainLayout } from "./MainLayout";
 // import { Session } from "@supabase/supabase-js";
@@ -47,18 +46,19 @@ export default App;
 
 async function protectedLoader() {
   const sessionToken = await isAuthenticated();
-  if (!sessionToken || !sessionToken.access_token) {
+  console.log(sessionToken);
+  if (!sessionToken) {
     return redirect("/login");
   }
 
-  const auth = await supabase.auth.getUser(sessionToken.access_token);
+  const auth = await supabase.auth.getUser(sessionToken);
   if (!auth.data?.user) {
     return redirect("/login");
   }
   return { sessionToken };
 }
 
-const isAuthenticated = async (): Promise<Session | false> => {
+const isAuthenticated = async (): Promise<string | false> => {
   return new Promise((resolve) => {
     chrome.storage.local.get(["wiseFlashcardsSessionToken"], function(result) {
       if (result.wiseFlashcardsSessionToken) {

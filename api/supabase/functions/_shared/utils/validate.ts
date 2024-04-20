@@ -23,6 +23,7 @@ async (req: Request) => {
     if (method !== RequestMethod.GET && schema.fields.body) {
       request.body = await req.json();
     }
+    request.header = { Authorization: req.headers.get("Authorization") };
     await schema.validate(request);
 
     return await handler(request);

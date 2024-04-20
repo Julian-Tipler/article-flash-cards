@@ -1,6 +1,6 @@
 import { createCards } from "../api/create-cards";
 import "./button.css";
-import "../icon.png"
+import "../icon.png";
 
 export const displayCollapsedIconAndButton = () => {
   // Display the icon
@@ -27,15 +27,24 @@ export const displayCollapsedIconAndButton = () => {
 
 const handleCreateFlashCards = (button) => {
   return async () => {
-    button.innerHTML = "Creating Flashcards...";
-
-    const articleText = extractArticleText();
-    const { setId } = await createCards(articleText);
-    if (setId) {
+    const sessionToken = await isAuthenticated();
+    if (!sessionToken) {
+      console.error("No session token found");
+      window.open(`${import.meta.env.VITE_WEB_URL}/login`, "_blank");
+      return;
+    }
+    try {
+      button.innerHTML = "Creating Flashcards...";
+      const articleText = extractArticleText();
+      const { setId } = await createCards(articleText, sessionToken);
+      if (!setId) {
+        throw Error("No setId returned from API");
+      }
       button.innerHTML = "Flashcards Created!";
       button.style.backgroundColor = "green";
       window.open(`${import.meta.env.VITE_WEB_URL}/sets/${setId}`, "_blank");
-    } else {
+    } catch (error) {
+      console.error("Error creating flashcards");
       button.innerHTML = "Failed to create Flashcards!";
       button.style.backgroundColor = "red";
     }
@@ -61,7 +70,6 @@ const extractArticleText = () => {
   }, null);
 
   if (!content) {
-    console.warn("No content found using common selectors, defaulting to body");
     return document.body.innerText.trim();
   }
 
@@ -75,4 +83,16 @@ const cleanText = (text) => {
     .replace(/\s{2,}/g, " ") // Replace multiple whitespace with a single space
     .replace(/[\r\n]+/g, "\n") // Replace multiple line breaks with a single one
     .trim(); // Trim whitespace from start and end of text
+};
+
+const isAuthenticated = async () => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(["wiseFlashcardsSessionToken"], function(result) {
+      if (result.wiseFlashcardsSessionToken) {
+        resolve(result.wiseFlashcardsSessionToken);
+      } else {
+        resolve(false);
+      }
+    });
+  });
 };

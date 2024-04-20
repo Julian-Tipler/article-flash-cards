@@ -11,7 +11,6 @@ serve(async (req: Request) => {
     case RequestMethod.POST:
       return await postCards(req);
     case RequestMethod.GET: {
-      // extract params from the req
       const url = new URL(req.url);
       const params = Object.fromEntries(url.searchParams.entries());
       if (params.setId) {

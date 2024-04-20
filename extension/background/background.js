@@ -11,6 +11,10 @@ chrome.runtime.onMessageExternal.addListener(
           sendResponse({ success: false, message: "Token is empty" });
         }
         break;
+      case "removeWiseFlashcardsSessionToken":
+        removeWiseFlashcardsSessionToken();
+        sendResponse({ success: true, message: "Token has been removed" });
+        break;
     }
     return true;
   }
@@ -23,6 +27,10 @@ function saveWiseFlashcardsSessionToken(token) {
   );
 }
 
+function removeWiseFlashcardsSessionToken() {
+  chrome.storage.local.set({ wiseFlashcardsSessionToken: null }, function() {});
+}
+
 // Logout user upon unauthorized request
 chrome.webRequest.onHeadersReceived.addListener(
   function(details) {
@@ -30,7 +38,9 @@ chrome.webRequest.onHeadersReceived.addListener(
 
     if (isUnauthorized) {
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: "logout" });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: "removeWiseFlashcardsSessionToken",
+        });
       });
     }
 

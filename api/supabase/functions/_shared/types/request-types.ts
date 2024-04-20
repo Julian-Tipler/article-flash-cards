@@ -8,6 +8,7 @@ export enum RequestMethod {
 export class CompleteRequest {
   params: any;
   body: any;
+  header: any;
 
   constructor(params: any = {}, body: any = {}) {
     this.params = params;
