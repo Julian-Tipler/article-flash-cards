@@ -3,7 +3,8 @@
   "name": "AI Flashcards",
   "description": "A simple extension that allows you to create flash cards from articles",
   "version": "1.0",
-  "permissions": ["webRequest"],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuxu3Xt9Nd3hMlPvwjjB5a7g04xSL8/A2fkqOP0uOYBjd0qVlDeok/+PA9h/kRYXZse23TJG4NzSNegDSxhODQ9wAaaET5fAaBNZS+13w/St5Dv7oJOrz/Hst/vraXnGPmmDyLnUns+xf5Z1BzU9+wfq+if5gkILn7dkKRvjDX8EiUmV6H09u3mv2STxtHs9elCFtGpnozYbqtvY1s/stS8g0DYoMDZk8jqRy1DhGh5H0jLSs88PFWawMtYypqXo8HocmT3YDzhvzpdFJeuk35o5C4qqW6KiQ3BuWlQWdVXNqMMBRQcvgdyCWxlPB8vmIgFtnJIEi0mYCbzjbGCIB4wIDAQAB",
+  "permissions": ["webRequest","storage"],
   "action": {
     "default_popup": "index.html"
   },
