@@ -17,6 +17,7 @@ jobs:
 
       - name: Start Supabase local development setup
         run: supabase start
+        working-directory: ./api
 
       - name: Verify generated types are checked in
         run: |
@@ -26,3 +27,4 @@ jobs:
             git diff
             exit 1
           fi
+        working-directory: ./api
