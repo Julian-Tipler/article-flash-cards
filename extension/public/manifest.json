@@ -15,7 +15,7 @@
     "matches": [
       "*://localhost:*/*",
       "*://127.0.0.1:*/*",
-      "*://article-flash-cards-login.onrender.com/*"
+      "*://wiseflashcards.com/*"
     ]
   },
   "content_scripts": [
