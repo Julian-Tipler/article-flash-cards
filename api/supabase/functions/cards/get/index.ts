@@ -17,10 +17,10 @@ const schema: ObjectSchema<Req> = object({
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const user = authenticateUser(req);
+    const user = await authenticateUser(req);
     const { setId } = req.params;
 
-    const { cards, set } = await readSet({ setId,user });
+    const { cards, set } = await readSet({ setId, userId: user.id });
     console.log(cards, set);
     const response = {
       cards,

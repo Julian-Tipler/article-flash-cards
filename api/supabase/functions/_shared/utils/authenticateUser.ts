@@ -1,6 +1,7 @@
 import { supabase } from "../clients/supabase.ts";
+import { CompleteRequest } from "../types/request-types.ts";
 
-export async function authenticateUser(request) {
+export async function authenticateUser(request: CompleteRequest) {
   const token = request.header.Authorization?.split(" ")[1];
 
   if (!token) {
