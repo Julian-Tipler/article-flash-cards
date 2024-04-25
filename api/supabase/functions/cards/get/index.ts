@@ -21,7 +21,6 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
     const { setId } = req.params;
 
     const { cards, set } = await readSet({ setId, userId: user.id });
-    console.log(cards, set);
     const response = {
       cards,
       set,

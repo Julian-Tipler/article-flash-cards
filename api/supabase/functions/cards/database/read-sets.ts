@@ -1,7 +1,6 @@
 import { supabase } from "../../_shared/clients/supabase.ts";
 
 export const readSets = async ({ userId }: { userId: string }) => {
-  console.log("user", userId);
   const { data, error } = await supabase.from("sets").select("*").eq(
     "userId",
     userId,
