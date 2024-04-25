@@ -3,6 +3,7 @@ import { CORSResponse } from "../../_shared/utils/cors.ts";
 import { validate } from "../../_shared/utils/validate.ts";
 import { object, ObjectSchema, string } from "https://esm.sh/yup@1.2.0";
 import { readSet } from "../database/read-set.ts";
+import { authenticateUser } from "../../_shared/utils/authenticateUser.ts";
 
 interface Req {
   params: {
@@ -16,9 +17,10 @@ const schema: ObjectSchema<Req> = object({
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
+    const user = await authenticateUser(req);
     const { setId } = req.params;
 
-    const { cards, set } = await readSet({ setId });
+    const { cards, set } = await readSet({ setId, userId: user.id });
     const response = {
       cards,
       set,

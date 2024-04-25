@@ -13,7 +13,7 @@ serve(async (req: Request) => {
     case RequestMethod.GET: {
       const url = new URL(req.url);
       const params = Object.fromEntries(url.searchParams.entries());
-      if (params.setId) {
+      if (params?.setId) {
         return await getSet(req);
       } else {
         return await getSets(req);
