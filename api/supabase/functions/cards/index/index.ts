@@ -3,15 +3,15 @@ import { CORSResponse } from "../../_shared/utils/cors.ts";
 import { validate } from "../../_shared/utils/validate.ts";
 import { object, ObjectSchema, string } from "https://esm.sh/yup@1.2.0";
 import { readSets } from "../database/read-sets.ts";
+import { authenticateUser } from "../../_shared/utils/authenticateUser.ts";
 
-interface Req {
-}
-
+type Req = Record<string | number | symbol, unknown>;
 const schema: ObjectSchema<Req> = object();
 
-const handler = async (_req: CompleteRequest): Promise<Response> => {
+const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const cards = await readSets();
+    const user = await authenticateUser(req);
+    const cards = await readSets({ userId: user.id });
 
     const response = {
       cards,

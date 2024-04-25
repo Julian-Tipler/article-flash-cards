@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlipCard } from "./FlipCard";
 import { Title } from "@/app/shared/components/Title";
 import EmblaCarousel from "./EmblaCarousel";
+import { supabase } from "@/app/shared/clients/supabase/supabase-client";
 
 export type Card = {
   id: string;
@@ -19,38 +20,27 @@ const Cards = ({ params }: { params: { id: string } }) => {
   const [cards, setCards] = useState<Card[]>([]);
   const [set, setSet] = useState<Set | null>(null);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
 
   const { id } = params;
 
   useEffect(() => {
-    fetch(
-      process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/cards/?setId=${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-      }
-    )
+    supabase.functions
+      .invoke(`cards?setId=${id}`, { method: "GET" })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        const { data, error } = response;
+        if (error) {
+          setError(error.message || "An unexpected error occurred");
         }
-        return response.json();
-      })
-      .then((data) => {
         setCards(data.cards);
         setSet(data.set);
       })
       .catch((error) => {
-        if (error.name === `AbortError`) {
-          return { aborted: true };
-        }
-        console.error(error);
-        return { error: error.message };
+        setError(error.message);
       });
   }, [id]);
+
+  if (error) return <div>{error}</div>;
   if (!cards.length || !set) return <div>Fetching cards...</div>;
   const slides = cards.map((card, index) => {
     return (

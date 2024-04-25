@@ -1,41 +1,37 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { supabase } from "@/app/shared/clients/supabase/supabase-client";
 
-const Cards = ({ params }: { params: { id: string } }) => {
-  const [sets, setSets] = React.useState([]);
-  const { id } = params;
+interface CardSet {
+  id: string;
+  title: string;
+}
+
+const Cards = () => {
+  const [sets, setSets] = React.useState<CardSet[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_SUPABASE_FUNCTIONS_URL + `/v1/cards`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-      },
-    })
+    supabase.functions
+      .invoke(`cards`, { method: "GET" })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        const { data, error } = response;
+        if (error) {
+          setError(error.message || "An unexpected error occurred");
         }
-        return response.json();
-      })
-      .then((data) => {
         setSets(data.cards);
       })
       .catch((error) => {
-        if (error.name === `AbortError`) {
-          return { aborted: true };
-        }
-        console.error("FETCH regular error", error);
-        return { error: error.message };
+        setError(error.message);
       });
-  }, [id]);
+  }, []);
 
-  if (!sets) return <div>Failed to fetch data</div>;
+  if (error) return <div>{error}</div>;
+  if (!sets.length) return <div>loading...</div>;
   return (
     <div className="flex flex-col gap-4">
-      {sets.map((set: any) => (
+      {sets.map((set: CardSet) => (
         <Link key={set.id} href={`/sets/${set.id}`} className="truncate">
           <div className="bg-background-white p-4 flex items-center max-w-2xl truncate rounded-lg">
             {set.title}
