@@ -13,7 +13,7 @@ supabase.auth.onAuthStateChange((event, session) => {
   if (session && session.provider_refresh_token) {
     window.localStorage.setItem(
       "oauth_provider_refresh_token",
-      session.provider_refresh_token
+      session.provider_refresh_token,
     );
   }
 
