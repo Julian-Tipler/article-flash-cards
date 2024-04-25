@@ -6,27 +6,25 @@ export const readSet = async (
     userId: string;
   },
 ) => {
-  const { data, error } = await supabase.from("cards").select("*").eq(
-    "setId",
-    setId,
-  );
-  const { data: setData, error: setError } = await supabase.from(
-    "sets",
-  ).select("*").eq(
-    "id",
-    setId,
-  ).eq(
-    "userId",
-    userId,
-  ).single();
-  if (error) {
-    throw error;
+  const [cardsResponse, setResponse] = await Promise.all([
+    supabase.from("cards").select("*").eq("setId", setId),
+    supabase.from("sets").select("*").eq("id", setId).eq("userId", userId)
+      .single(),
+  ]);
+
+  const { data: cardsData, error: cardsError } = cardsResponse;
+  const { data: setData, error: setError } = setResponse;
+
+  if (cardsError) {
+    throw cardsError;
   }
+
   if (setError) {
     throw setError;
   }
+
   return {
-    cards: data,
+    cards: cardsData,
     set: setData,
   };
 };
