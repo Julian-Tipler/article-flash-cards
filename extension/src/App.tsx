@@ -7,9 +7,7 @@ import {
 import { Login } from "./views/auth/Login";
 import { supabase } from "./clients/supabase-client";
 import { Splash } from "./views/Splash";
-// import { MainLayout } from "./MainLayout";
-// import { Session } from "@supabase/supabase-js";
-// import { supabase } from "./clients/supabase";
+
 
 const App = () => {
   const router = createHashRouter([

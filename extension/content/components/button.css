@@ -1,4 +1,4 @@
-.wise-icon {
+#wise-flashcards-content-container .wise-icon {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -16,11 +16,11 @@
   transition: opacity 0.3s;
 }
 
-.wise-icon:hover {
+#wise-flashcards-content-container .wise-icon:hover {
   opacity: 1;
 }
 
-.wise-create-flashcards-button {
+#wise-flashcards-content-container .wise-create-flashcards-button {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -36,6 +36,6 @@
   font-weight: bold;
 }
 
-.wise-button-hidden {
+#wise-flashcards-content-container .wise-button-hidden {
   display: none;
 }

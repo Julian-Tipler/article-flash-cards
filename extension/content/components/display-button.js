@@ -1,17 +1,21 @@
 import { createCards } from "../api/create-cards";
 import "./button.css";
 import "../icon.png";
+import "./container.css"
 
 export const displayCollapsedIconAndButton = () => {
   // Display the icon
   const body = document.querySelector("body");
+  const container = document.createElement("div");
+  container.id = "wise-flashcards-content-container";
   const icon = document.createElement("button");
   icon.className = "wise-icon";
   icon.style.backgroundImage = `url(${chrome.runtime.getURL(
     "assets/icon.png"
   )})`; // Set the background image using the imported path
   icon.style.backgroundSize = "cover";
-  body.appendChild(icon);
+  container.appendChild(icon);
+  body.appendChild(container);
   // Display a button upon clicking the icon
   const button = document.createElement("button");
   button.className = "wise-create-flashcards-button wise-button-hidden";
@@ -22,7 +26,7 @@ export const displayCollapsedIconAndButton = () => {
     button.classList.remove("wise-button-hidden");
   });
 
-  body.appendChild(button);
+  container.appendChild(button);
 };
 
 const handleCreateFlashCards = (button) => {

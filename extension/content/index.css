@@ -5,15 +5,15 @@
 /*
   1. Use a more-intuitive box-sizing model.
 */
-*,
-*::before,
-*::after {
+#wise-flashcards-content-container *,
+#wise-flashcards-content-container *::before,
+#wise-flashcards-content-container *::after {
   box-sizing: border-box;
 }
 /*
   2. Remove default margin
 */
-* {
+#wise-flashcards-content-container * {
   margin: 0;
 }
 /*
@@ -21,46 +21,46 @@
   3. Add accessible line-height
   4. Improve text rendering
 */
-body {
+#wise-flashcards-content-container body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 /*
   5. Improve media defaults
 */
-img,
-picture,
-video,
-canvas,
-svg {
+#wise-flashcards-content-container img,
+#wise-flashcards-content-container picture,
+#wise-flashcards-content-container video,
+#wise-flashcards-content-container canvas,
+#wise-flashcards-content-container svg {
   display: block;
   max-width: 100%;
 }
 /*
   6. Remove built-in form typography styles
 */
-input,
-button,
-textarea,
-select {
+#wise-flashcards-content-container input,
+#wise-flashcards-content-container button,
+#wise-flashcards-content-container textarea,
+#wise-flashcards-content-container select {
   font: inherit;
 }
 /*
   7. Avoid text overflows
 */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#wise-flashcards-content-container p,
+#wise-flashcards-content-container h1,
+#wise-flashcards-content-container h2,
+#wise-flashcards-content-container h3,
+#wise-flashcards-content-container h4,
+#wise-flashcards-content-container h5,
+#wise-flashcards-content-container h6 {
   overflow-wrap: break-word;
 }
 /*
   8. Create a root stacking context
 */
-#root,
+#wise-flashcards-content-container #root,
 #__next {
   isolation: isolate;
 }
