@@ -11,7 +11,7 @@ export const Header = () => {
       <h1 className="text-xl font-bold"> </h1>
       <button
         onClick={handleLogout}
-        className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+        className="rounded bg-card px-4 py-2 font-bold text-white hover:bg-red-700"
       >
         Logout
       </button>

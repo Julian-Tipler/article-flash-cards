@@ -91,10 +91,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="px-4 py-4 lg:mt-5 lg:px-6">
-          {/* <!-- Menu Group --> */}
-          <div>
-            <h1 className="text-xl font-extrabold">AI Flashcards</h1>
+        <nav className="px-4 py-4 lg:px-6">
+          <div className="flex flex-col">
+            <Link href={"/"} className="flex flex-col items-center">
+              <img src="/icon-lg.png" alt="Logo" className="h-28 w-28" />
+              <h1 className=" text-left text-3xl font-extrabold">
+                AI Flashcards
+              </h1>
+            </Link>
             <hr className="border-border border-0.5 mt-7" />
             <h3 className="text-bodydark2 mb-4 ml-4 mt-9 text-sm font-semibold">
               MENU
