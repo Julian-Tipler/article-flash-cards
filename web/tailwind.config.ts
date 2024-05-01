@@ -18,10 +18,10 @@ const config: Config = {
         "primary-light": "white",
       },
       colors: {
-        "background-nav": "#1C2434",
+        "background-nav": "#bfdbfe",
         "background-dash": "#F1F5F9",
         "background-white": "white",
-        "border": "gray",
+        "border": "gray-500", 
       },
     },
   },

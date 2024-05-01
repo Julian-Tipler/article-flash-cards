@@ -58,12 +58,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`text-primary-light bg-background-nav absolute left-0 top-0 z-9999 flex h-screen w-64 flex-col overflow-y-hidden ease-linear color lg:static lg:translate-x-0 ${
+      className={`text-gray-700  absolute left-0 top-0 z-9999 flex h-screen w-64 flex-col overflow-y-hidden ease-linear color lg:static lg:translate-x-0 border-r border-border ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 ">
         {/* <img src={Logo} alt="Logo" /> */}
         <button
           ref={trigger}
@@ -91,13 +91,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+        <nav className="py-4 px-4 lg:mt-5 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+            <h1 className="text-xl font-extrabold">AI Flashcards</h1>
+            <hr className="mt-7"/>
+            <h3 className="mt-9 mb-4 ml-4 text-sm font-semibold text-bodydark2">
               MENU
             </h3>
-
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Profile --> */}
               <li>
