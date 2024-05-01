@@ -7,11 +7,11 @@ export const Header = () => {
     supabase.auth.signOut();
   };
   return (
-    <header className=" border-b border-border text-gray-700 p-4 flex justify-between items-center">
+    <header className=" border-border border-0.5  bg-navi flex items-center justify-between border-b p-4">
       <h1 className="text-xl font-bold"> </h1>
       <button
         onClick={handleLogout}
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
       >
         Logout
       </button>

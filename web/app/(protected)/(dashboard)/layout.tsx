@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
-          <main className="flex-1 overflow-y-auto bg-background-dash">
+          <main className="flex-1 overflow-y-auto bg-navi">
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
               {children}
             </div>

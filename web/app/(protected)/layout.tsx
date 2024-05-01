@@ -30,7 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {
               action: "saveWiseFlashcardsSessionToken",
               token: session.access_token,
-            }
+            },
           );
         }
       } else {
@@ -39,7 +39,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           process.env.NEXT_PUBLIC_CHROME_EXTENSION_ID,
           {
             action: "removeWiseFlashcardsSessionToken",
-          }
+          },
         );
       }
     });
@@ -50,7 +50,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className=" bg-navi flex h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
   }
   if (!user) {
     redirect(`/login/?redirectTo=${encodeURIComponent(pathname)}`);

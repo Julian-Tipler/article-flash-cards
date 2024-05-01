@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  @apply text-black;
+  @apply text-default-font;
 }
 
 @layer utilities {
@@ -26,4 +26,3 @@ body {
     text-wrap: balance;
   }
 }
-

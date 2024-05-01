@@ -13,15 +13,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "navi": "#0F172B",
+        "dash": "#F1F5F9",
+        "white": "white",
+        "border": "rgba(248, 250, 252, 0.06)",
+        "default-font": "#94A3B8",
+        "card": "#2E3856",
+      },
       textColor: {
         "primary-dark": "black",
         "primary-light": "white",
       },
-      colors: {
-        "background-nav": "#bfdbfe",
-        "background-dash": "#F1F5F9",
-        "background-white": "white",
-        "border": "gray-500", 
+      borderWidth: {
+        "0.5": "0.5px",
       },
     },
   },

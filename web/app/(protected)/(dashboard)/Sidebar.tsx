@@ -17,7 +17,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
   const [sidebarExpanded, setSidebarExpanded] = useState(
-    storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
+    storedSidebarExpanded === null ? false : storedSidebarExpanded === "true",
   );
 
   // close on click outside
@@ -58,12 +58,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`text-gray-700  absolute left-0 top-0 z-9999 flex h-screen w-64 flex-col overflow-y-hidden ease-linear color lg:static lg:translate-x-0 border-r border-border ${
+      className={` bg-navi z-9999  color border-border border-0.5 absolute left-0 top-0 flex h-screen w-64 flex-col overflow-y-hidden border-r ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 ">
+      <div className="py-5.5 lg:py-6.5 flex items-center justify-between gap-2 px-6 ">
         {/* <img src={Logo} alt="Logo" /> */}
         <button
           ref={trigger}
@@ -91,12 +91,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="py-4 px-4 lg:mt-5 lg:px-6">
+        <nav className="px-4 py-4 lg:mt-5 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
             <h1 className="text-xl font-extrabold">AI Flashcards</h1>
-            <hr className="mt-7"/>
-            <h3 className="mt-9 mb-4 ml-4 text-sm font-semibold text-bodydark2">
+            <hr className="border-border border-0.5 mt-7" />
+            <h3 className="text-bodydark2 mb-4 ml-4 mt-9 text-sm font-semibold">
               MENU
             </h3>
             <ul className="mb-6 flex flex-col gap-1.5">
@@ -104,7 +104,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={"/profile"}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`text-bodydark1 hover:bg-graydark dark:hover:bg-meta-4 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
                     pathname.includes("profile") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
@@ -117,7 +117,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={"/sets"}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`text-bodydark1 hover:bg-graydark dark:hover:bg-meta-4 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
                     pathname.includes("profile") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
