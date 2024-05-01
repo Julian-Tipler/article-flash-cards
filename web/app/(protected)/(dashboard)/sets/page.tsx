@@ -33,7 +33,7 @@ const Cards = () => {
     <div className="flex flex-col gap-4">
       {sets.map((set: CardSet) => (
         <Link key={set.id} href={`/sets/${set.id}`} className="truncate">
-          <div className="bg-white p-4 flex items-center max-w-2xl truncate rounded-lg">
+          <div className="bg-card p-4 flex items-center max-w-2xl truncate rounded-lg">
             {set.title}
           </div>
         </Link>
