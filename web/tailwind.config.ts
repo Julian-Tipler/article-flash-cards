@@ -18,7 +18,7 @@ const config: Config = {
         "dash": "#F1F5F9",
         "white": "white",
         "border": "rgba(248, 250, 252, 0.06)",
-        "default-font": "#94A3B8",
+        "default-font": "#c1d5f2",
         "card": "#2E3856",
       },
       textColor: {
