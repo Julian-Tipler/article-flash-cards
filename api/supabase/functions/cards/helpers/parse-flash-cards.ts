@@ -11,10 +11,12 @@ type Set = {
 export function parseFlashCards({ text }: { text: string }): Set {
   const titleRegex = /title:\s*"([^"]+)"/;
   const titleMatch = text.match(titleRegex);
+  let title;
   if (!titleMatch) {
-    throw new Error("No title found in the text.");
+    title = "Untitled Set";
+  } else {
+    title = titleMatch[1];
   }
-  const title = titleMatch[1];
 
   // Update regex to accommodate the comma between 'front' and 'back'
   const cardRegex = /\*\s*front:\s*"([^"]+)",\s*back:\s*"([^"]+)"/g;
