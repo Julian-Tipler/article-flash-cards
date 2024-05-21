@@ -7,8 +7,8 @@ import { parseFlashCards } from "../helpers/parse-flash-cards.ts";
 import { createSet } from "../database/create-set.ts";
 import { createCards } from "../database/create-cards.ts";
 import { generatePrompt } from "../cohere/flashcard-prompt.ts";
-import jwt from "https://esm.sh/jsonwebtoken@9.0.2";
 import { authenticateUser } from "../../_shared/utils/authenticateUser.ts";
+import { readUserPreferences } from "../database/read-user-preferences.ts";
 
 interface Req {
   body: {
@@ -24,10 +24,12 @@ const schema: ObjectSchema<Req> = object({
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const { content }: { content: string } = await req.body;
     const user = await authenticateUser(req);
 
-    const prompt = generatePrompt({ content });
+    const { content }: { content: string } = await req.body;
+
+    const { difficulty, quantity } = await readUserPreferences(user.id);
+    const prompt = generatePrompt({ content, difficulty, quantity });
     const { text } = await cohereCompletion({ prompt });
 
     if (!text) {
