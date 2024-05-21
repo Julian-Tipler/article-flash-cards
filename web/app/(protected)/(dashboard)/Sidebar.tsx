@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PiCards } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
+import { AiOutlineSetting } from "react-icons/ai";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -104,7 +105,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               MENU
             </h3>
             <ul className="mb-6 flex flex-col gap-1.5">
-              {/* <!-- Menu Item Profile --> */}
               <li>
                 <Link
                   href={"/profile"}
@@ -116,8 +116,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Profile
                 </Link>
               </li>
-              {/* <!-- Menu Item Profile --> */}
-              {/* <!-- Menu Item Sets --> */}
               <li>
                 <Link
                   href={"/sets"}
@@ -129,7 +127,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Sets
                 </Link>
               </li>
-              {/* <!-- Menu Item Sets --> */}
+              <li>
+                <Link
+                  href={"/preferences"}
+                  className={`text-bodydark1 hover:bg-graydark dark:hover:bg-meta-4 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium duration-300 ease-in-out ${
+                    pathname.includes("profile") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <AiOutlineSetting size={20} />
+                  Preferences
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
