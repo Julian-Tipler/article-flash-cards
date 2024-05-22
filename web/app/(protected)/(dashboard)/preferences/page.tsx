@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 const Preferences = () => {
   const [difficulty, setDifficulty] = useState<number | null>(null);
   const [quantity, setQuantity] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     supabase.functions
@@ -15,8 +16,19 @@ const Preferences = () => {
       .then((response) => {
         const { data } = response;
         if (data) {
-          setDifficulty(data.defaultDifficulty);
-          setQuantity(data.defaultQuantity);
+          if (data.defaultDifficulty) {
+            setDifficulty(data.defaultDifficulty);
+          } else {
+            setDifficulty(5);
+          }
+          if (data.defaultQuantity) {
+            setQuantity(data.defaultQuantity);
+          } else {
+            setQuantity(5);
+          }
+          setLoading(false);
+        } else {
+          throw new Error("No data returned from server");
         }
       })
       .catch((error) => {
@@ -53,7 +65,7 @@ const Preferences = () => {
       });
   };
 
-  if (!difficulty || !quantity) return <div>loading...</div>;
+  if (loading || !quantity || !difficulty) return <div>loading...</div>;
 
   return (
     <div className="flex flex-col space-y-4 ">

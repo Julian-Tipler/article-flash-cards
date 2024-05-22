@@ -63,7 +63,7 @@ const Cards = ({ params }: { params: { id: string } }) => {
         setCurrentSlide={setCurrentSlide}
       />
       <div>
-        {currentSlide}/{cards.length}
+        {currentSlide + 1}/{cards.length}
       </div>
     </div>
   );
