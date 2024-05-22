@@ -28,8 +28,15 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
 
     const { content }: { content: string } = await req.body;
 
-    const { difficulty, quantity } = await readUserPreferences(user.id);
-    const prompt = generatePrompt({ content, difficulty, quantity });
+    const { defaultDifficulty, defaultQuantity } = await readUserPreferences(
+      user.id,
+    );
+
+    const prompt = generatePrompt({
+      content,
+      difficulty: defaultDifficulty,
+      quantity: defaultQuantity,
+    });
     const { text } = await cohereCompletion({ prompt });
 
     if (!text) {

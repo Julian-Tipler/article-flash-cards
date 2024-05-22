@@ -4,8 +4,8 @@ import { Button } from "@/app/shared/components/Button";
 import React, { useEffect, useState } from "react";
 
 const Preferences = () => {
-  const [difficulty, setDifficulty] = useState(5);
-  const [quantity, setQuantity] = useState(5);
+  const [difficulty, setDifficulty] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState<number | null>(null);
 
   useEffect(() => {
     supabase.functions
@@ -52,6 +52,8 @@ const Preferences = () => {
         console.error(error.message);
       });
   };
+
+  if (!difficulty || !quantity) return <div>loading...</div>;
 
   return (
     <div className="flex flex-col space-y-4 ">
