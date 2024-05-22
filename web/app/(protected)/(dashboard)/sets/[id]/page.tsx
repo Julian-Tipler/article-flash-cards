@@ -57,9 +57,14 @@ const Cards = ({ params }: { params: { id: string } }) => {
       <Title text={set.title} />
       <EmblaCarousel
         slides={slides}
-        options={{}}
+        options={{
+          duration: 20,
+        }}
         setCurrentSlide={setCurrentSlide}
       />
+      <div>
+        {currentSlide}/{cards.length}
+      </div>
     </div>
   );
 };

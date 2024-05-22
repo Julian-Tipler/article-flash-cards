@@ -7,7 +7,8 @@ import { parseFlashCards } from "../helpers/parse-flash-cards.ts";
 import { createSet } from "../database/create-set.ts";
 import { createCards } from "../database/create-cards.ts";
 import { generatePrompt } from "../cohere/flashcard-prompt.ts";
-import jwt from "https://esm.sh/jsonwebtoken@9.0.2";
+import { authenticateUser } from "../../_shared/utils/authenticateUser.ts";
+import { readUserPreferences } from "../database/read-user-preferences.ts";
 
 interface Req {
   body: {
@@ -23,19 +24,19 @@ const schema: ObjectSchema<Req> = object({
 
 const handler = async (req: CompleteRequest): Promise<Response> => {
   try {
-    const { content }: { content: string } = await req.body;
-    const { Authorization } = req.header;
-    const token = Authorization.split("Bearer ")[1];
-    const payload = jwt.decode(token);
-    if (!payload) {
-      throw new Error("Failed to decode token");
-    }
-    const { sub } = payload;
-    if (!sub || typeof sub !== "string") {
-      throw new Error("Failed to grab sub from token");
-    }
+    const user = await authenticateUser(req);
 
-    const prompt = generatePrompt({ content });
+    const { content }: { content: string } = await req.body;
+
+    const { defaultDifficulty, defaultQuantity } = await readUserPreferences(
+      user.id,
+    );
+
+    const prompt = generatePrompt({
+      content,
+      difficulty: defaultDifficulty,
+      quantity: defaultQuantity,
+    });
     const { text } = await cohereCompletion({ prompt });
 
     if (!text) {
@@ -44,7 +45,7 @@ const handler = async (req: CompleteRequest): Promise<Response> => {
 
     const { cards, title } = parseFlashCards({ text });
 
-    const { setId } = await createSet({ userId: sub, title });
+    const { setId } = await createSet({ userId: user.id, title });
 
     await createCards({ cards, setId });
 
