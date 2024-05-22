@@ -1,9 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import { supabase } from "@/app/shared/clients/supabase/supabase-client";
+import { Button } from "@/app/shared/components/Button";
+import React, { useEffect, useState } from "react";
 
 const Preferences = () => {
   const [difficulty, setDifficulty] = useState(5);
   const [quantity, setQuantity] = useState(5);
+
+  useEffect(() => {
+    supabase.functions
+      .invoke(`users/preferences`, {
+        method: "GET",
+      })
+      .then((response) => {
+        const { data } = response;
+        if (data) {
+          setDifficulty(data.defaultDifficulty);
+          setQuantity(data.defaultQuantity);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  }, []);
 
   const handleDifficultyChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -15,6 +34,23 @@ const Preferences = () => {
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value);
     setQuantity(value);
+  };
+
+  const handleSubmit = () => {
+    supabase.functions
+      .invoke(`users/preferences`, {
+        method: "POST",
+        body: {
+          defaultDifficulty: difficulty,
+          defaultQuantity: quantity,
+        },
+      })
+      .then((response) => {
+        const { data, error } = response;
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   return (
@@ -53,6 +89,7 @@ const Preferences = () => {
           <span className="ml-2">{quantity}</span>
         </div>
       </div>
+      <Button text={"Update"} onClick={handleSubmit} className="w-24" />
     </div>
   );
 };
