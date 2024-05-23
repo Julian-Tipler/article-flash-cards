@@ -6,3 +6,6 @@
 
 /users/preferences
 * updates defaultDifficulty and defaultQuantity
+
+## Deployment
+deno task deploy
