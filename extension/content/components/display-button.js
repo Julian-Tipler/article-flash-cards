@@ -1,6 +1,7 @@
 import { createCards } from "../api/create-cards";
 import "./button.css";
 import "../icon.png";
+import { createIcon } from "./create-icon";
 
 export const displayCollapsedIconAndButton = () => {
   // Display the icon
@@ -9,15 +10,14 @@ export const displayCollapsedIconAndButton = () => {
   container.id = "wise-flashcards-content-container";
   const icon = document.createElement("button");
   icon.className = "wise-icon";
-  icon.style.backgroundImage = `url(${chrome.runtime.getURL(
-    "assets/icon.png"
-  )})`; // Set the background image using the imported path
-  icon.style.backgroundSize = "cover";
+  icon.appendChild(createIcon());
   body.appendChild(icon);
   // Display a button upon clicking the icon
   const button = document.createElement("button");
   button.className = "wise-create-flashcards-button wise-button-hidden";
-  button.innerHTML = "Create Flashcards";
+  button.innerHTML+= "Create Flashcards"
+  button.appendChild(createIcon())
+
 
   button.addEventListener("click", handleCreateFlashCards(button));
   icon.addEventListener("click", () => {
@@ -47,7 +47,7 @@ const handleCreateFlashCards = (button) => {
       window.open(`${import.meta.env.VITE_WEB_URL}/sets/${setId}`, "_blank");
     } catch (error) {
       console.error("Error creating flashcards");
-      button.innerHTML = "Failed to create Flashcards!";
+      button.innerHTML = "Error creating flashcards!";
       button.style.backgroundColor = "red";
     }
     button.disabled = true;

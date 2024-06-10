@@ -1,8 +1,8 @@
-** Tools
+## Tools
 tailwind?
 Chrome extension manifest
 
-** Function
+## Function
 UI Basically just provides a link to login
 Content provides a single button to "generate cards"
 * Button turns to "loading"
@@ -11,6 +11,9 @@ Content provides a single button to "generate cards"
 * Receives back a :id
 * .then opens a new webpage at <web>/cards/:id
 
-** Routes
+## Routes
 /login
 /
+
+## Local Development
+npm run watch
