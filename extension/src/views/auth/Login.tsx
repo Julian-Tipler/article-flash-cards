@@ -8,7 +8,7 @@ export const Login = () => {
         style={{
           width: "25px",
           height: "25px",
-          backgroundImage: `url(${chrome.runtime.getURL("assets/icon.png")})`,
+          backgroundImage: `url(${chrome.runtime.getURL("icon-lg.png")})`,
           backgroundSize: "cover",
         }}
       ></div>
