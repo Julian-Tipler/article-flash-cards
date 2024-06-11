@@ -8,8 +8,8 @@
     "build": "tsc && vite build --mode production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "local:build": "tsc && vite build --mode development",
-    "watch": "onchange -k '{src,public,.env,content}/**/*' -- npm run local:build"
+    "watch": "onchange -k '{src,public,.env,content}/**/*' -- npm run local:build",
+    "local:build": "tsc && vite build --mode development"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.42.3",

@@ -3,8 +3,8 @@ const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("class", "w-6 h-6 text-gray-800 dark:text-white");
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  svg.setAttribute("width", "24");
-  svg.setAttribute("height", "24");
+  svg.setAttribute("width", "16");
+  svg.setAttribute("height", "16");
   svg.setAttribute("fill", "none");
   svg.setAttribute("viewBox", "0 0 24 24");
 

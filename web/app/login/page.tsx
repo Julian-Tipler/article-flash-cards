@@ -36,17 +36,21 @@ function LoginPage() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center items-center bg-blue-200">
-      <div className="flex flex-col justify-center items-center gap-2 mb-36 rounded-lg overflow-hidden shadow-sm transition-shadow p-24 bg-white">
-        <img src="/icon-lg.png" alt="logo" className="w-32 h-32" />
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-blue-200">
+      <div className="mb-36 flex flex-col items-center justify-center gap-2 overflow-hidden rounded-lg bg-white p-24 shadow-sm transition-shadow">
+        <img
+          src="/ai-flashcard-logo.png"
+          alt="logo"
+          className="h-32 w-32"
+        />
         <h1 className="text-3xl font-bold text-gray-500">AI Flashcards</h1>
         <div>
           <button
             onClick={signInWithGoogle}
-            className="py-2 px-3 max-w-md w-52 flex justify-start items-center hover:bg-gray-100 focus:ring-gray-500 focus:ring-offset-gray-200 text-black transition ease-in duration-200 text-center shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md text-sm h-10"
+            className="flex h-10 w-52 max-w-md items-center justify-start rounded-md px-3 py-2 text-center text-sm text-black shadow-md transition duration-200 ease-in hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200"
           >
             <img
-              className="w-5 h-5 mr-6"
+              className="mr-6 h-5 w-5"
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               loading="lazy"
               alt="google logo"

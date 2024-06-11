@@ -95,7 +95,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <nav className="px-4 py-4 lg:px-6">
           <div className="flex flex-col">
             <Link href={"/"} className="flex flex-col items-center">
-              <img src="/icon-lg.png" alt="Logo" className="h-28 w-28" />
+              <img
+                src="/ai-flashcard-logo.png"
+                alt="Logo"
+                className="h-28 w-28"
+              />
               <h1 className=" text-left text-3xl font-extrabold">
                 AI Flashcards
               </h1>
