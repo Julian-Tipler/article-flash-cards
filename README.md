@@ -1,5 +1,7 @@
 <h1 align="center">AI Flashcards</h1>
-<img align="center" src="https://github.com/Julian-Tipler/article-flash-cards/assets/59591817/b4413e5f-dd80-49c2-9a26-64a0ea6a96d3" alt="logo" />
+<p align="center">
+  <img align="center" src="https://github.com/Julian-Tipler/article-flash-cards/assets/59591817/b4413e5f-dd80-49c2-9a26-64a0ea6a96d3" alt="logo" />
+</p>
 
 <p align="center">
 AI Flashcards leverages OpenAI to generate flashcards based on any news article or document.
