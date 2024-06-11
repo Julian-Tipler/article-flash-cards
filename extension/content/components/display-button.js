@@ -6,10 +6,6 @@ import { createIcon } from "./create-icon";
 export const displayCollapsedIconAndButton = async () => {
   // Parents
   const sRoot = document.createElement("div");
-  sRoot.style.position = "fixed";
-  sRoot.style.bottom = "0";
-  sRoot.style.right = "0";
-  sRoot.style.width="1px"
   sRoot.id = "wise-flashcards-content-container";
 
 
