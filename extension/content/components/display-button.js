@@ -6,12 +6,21 @@ import { createIcon } from "./create-icon";
 export const displayCollapsedIconAndButton = () => {
   // Display the icon
   const body = document.querySelector("body");
+
+
+  const sRoot = document.createElement("div");
+  sRoot.attachShadow({mode: 'open'});
+  if(sRoot?.shadowRoot) {
+    sRoot.shadowRoot.innerHTML = `<style>:host {all: initial;}</style>`
+  }
+
+
   const container = document.createElement("div");
   container.id = "wise-flashcards-content-container";
   const icon = document.createElement("button");
   icon.className = "wise-icon";
   icon.appendChild(createIcon());
-  body.appendChild(icon);
+  sRoot.shadowRoot?.appendChild(icon);
   // Display a button upon clicking the icon
   const button = document.createElement("button");
   button.className = "wise-create-flashcards-button wise-button-hidden";
@@ -24,7 +33,14 @@ export const displayCollapsedIconAndButton = () => {
     button.classList.remove("wise-button-hidden");
   });
 
-  body.appendChild(button);
+  sRoot.shadowRoot?.appendChild(button);
+  body.appendChild(sRoot);
+
+  const link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('href', './content/content.css');
+  sRoot.shadowRoot.appendChild(link);
+
 };
 
 const handleCreateFlashCards = (button) => {

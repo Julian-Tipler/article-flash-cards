@@ -32,6 +32,7 @@
     }
   ],
   "icons": {
-    "16": "favicon.png"
+    "48": "ai-flashcard-logo-48x48.png",
+    "128": "ai-flashcard-logo-128x128.png"
   }
 }

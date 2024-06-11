@@ -6,7 +6,7 @@ export const Splash = () => {
         style={{
           width: "25px",
           height: "25px",
-          backgroundImage: `url(${chrome.runtime.getURL("icon-lg.png")})`,
+          backgroundImage: `url(${chrome.runtime.getURL("ai-flashcard-logo-128x128.png")})`,
           backgroundSize: "cover",
         }}
       ></div>
