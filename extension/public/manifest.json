@@ -29,6 +29,12 @@
     {
       "resources": ["assets/icon.png"],
       "matches": ["*://*/*"]
+    }, 
+    {
+      "resources": [
+        "content/content.css"
+      ],
+      "matches": ["*://*/*"]
     }
   ],
   "icons": {

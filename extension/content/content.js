@@ -7,6 +7,6 @@ window.addEventListener("load", () => {
   init();
 });
 
-function init() {
-  displayCollapsedIconAndButton();
+async function  init() {
+  await displayCollapsedIconAndButton();
 }

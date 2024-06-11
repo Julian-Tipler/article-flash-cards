@@ -1,46 +1,52 @@
 import { createCards } from "../api/create-cards";
-import "./button.css";
-import "../icon.png";
 import { createIcon } from "./create-icon";
 
-export const displayCollapsedIconAndButton = () => {
-  // Display the icon
-  const body = document.querySelector("body");
 
 
+export const displayCollapsedIconAndButton = async () => {
+  // Parents
   const sRoot = document.createElement("div");
-  sRoot.attachShadow({mode: 'open'});
-  if(sRoot?.shadowRoot) {
-    sRoot.shadowRoot.innerHTML = `<style>:host {all: initial;}</style>`
-  }
+  sRoot.style.position = "fixed";
+  sRoot.style.bottom = "0";
+  sRoot.style.right = "0";
+  sRoot.style.width="1px"
+  sRoot.id = "wise-flashcards-content-container";
 
 
-  const container = document.createElement("div");
-  container.id = "wise-flashcards-content-container";
+
+  const shadowRoot = sRoot.attachShadow({mode: 'closed'});
+  // shadowRoot.innerHTML  = `<style>:host {all: initial;}</style>`;
+
+  const cssFiles = await Promise.all([
+    loadCss('content/content.css'),
+  ]);
+
+  cssFiles.forEach(css => {
+    const style = document.createElement('style');
+    style.textContent = css;
+    shadowRoot.appendChild(style);
+  });
+
+  // Icon
   const icon = document.createElement("button");
   icon.className = "wise-icon";
   icon.appendChild(createIcon());
-  sRoot.shadowRoot?.appendChild(icon);
-  // Display a button upon clicking the icon
+
+  // Button
   const button = document.createElement("button");
   button.className = "wise-create-flashcards-button wise-button-hidden";
   button.innerHTML+= "Create Flashcards"
   button.appendChild(createIcon())
-
-
+  
+  // Event listeners
   button.addEventListener("click", handleCreateFlashCards(button));
   icon.addEventListener("click", () => {
     button.classList.remove("wise-button-hidden");
   });
-
-  sRoot.shadowRoot?.appendChild(button);
-  body.appendChild(sRoot);
-
-  const link = document.createElement('link');
-  link.setAttribute('rel', 'stylesheet');
-  link.setAttribute('href', './content/content.css');
-  sRoot.shadowRoot.appendChild(link);
-
+  
+  shadowRoot.appendChild(button)
+  shadowRoot.appendChild(icon);
+  document.body.appendChild(sRoot);
 };
 
 const handleCreateFlashCards = (button) => {
@@ -114,3 +120,9 @@ const isAuthenticated = async () => {
     });
   });
 };
+
+
+async function loadCss(filePath) {
+  const response = await fetch(chrome.runtime.getURL(filePath));
+  return response.text();
+}
