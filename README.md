@@ -1,4 +1,6 @@
 <h1 align="center">AI Flashcards</h1>
+<img src="https://github.com/Julian-Tipler/article-flash-cards/assets/59591817/b4413e5f-dd80-49c2-9a26-64a0ea6a96d3" alt="logo" />
+
 <p align="center">
 AI Flashcards leverages OpenAI to generate flashcards based on any news article or document.
 </p>
@@ -14,10 +16,10 @@ AI Flashcards leverages OpenAI to generate flashcards based on any news article 
 I wanted to quiz myself when reading world news and science articles to make sure I understood the key points. Thus, AI Flashcards was born. This free chrome extension lets you create between 1 and 10 flashcards from any webpage.
 
 ### Card Generation  
-  <img src="https://github.com/Julian-Tipler/chat-gpt-extension/assets/59591817/9e81db22-2ad8-4300-94f3-b92bb9f35249" alt="autocomplete demonstration" width="600" />
+  <img src="https://github.com/Julian-Tipler/chat-gpt-extension/assets/59591817/9e81db22-2ad8-4300-94f3-b92bb9f35249" alt="card generation" width="600" />
 
 ### Quiz Yourself
-  <img src="https://github.com/Julian-Tipler/chat-gpt-extension/assets/59591817/9e81db22-2ad8-4300-94f3-b92bb9f35249" alt="autocomplete demonstration" width="600" />
+  <img src="https://github.com/Julian-Tipler/chat-gpt-extension/assets/59591817/9e81db22-2ad8-4300-94f3-b92bb9f35249" alt="quiz yourself" width="600" />
 
 
 ## Technologies
